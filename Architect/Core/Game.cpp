@@ -1,9 +1,5 @@
 #include "Game.hpp"
 
-//for now, coordinator has to be created here
-//the systems need a better way of accessing the coordinator
-Coordinator coordinator;
-
 float Game::getElapsedClockTime()
 {
 	auto end = std::chrono::steady_clock::now();
@@ -35,7 +31,7 @@ Game::Game()
 
 		coordinator.SetSystemSignature<AddingSystem>(signature);
 	}
-	addingSystem->Init();
+	addingSystem->Init(&coordinator);
 
 	this->Run();
 }
@@ -80,9 +76,8 @@ void Game::Run()
 		interpolation = accumulator / dt;
 
 		//rendering systems goes here with interpolation
-		std::cout << (int)this->getElapsedClockTime() << std::endl;
 
-		//tempory thing to end the program
-		if (this->getElapsedClockTime() >= 10.0f) game_is_running = false;
+		//tempory thing to end the program after a given amount of seconds
+		if (this->getElapsedClockTime() >= 3.0f) game_is_running = false;
 	}
 }

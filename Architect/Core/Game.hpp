@@ -14,6 +14,9 @@ public:
 	Game();
 
 private:
+	//create the global coordinator
+	Coordinator coordinator;
+
 	//systems
 	std::shared_ptr<AddingSystem> addingSystem;
 
