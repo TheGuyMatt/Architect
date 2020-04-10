@@ -18,6 +18,21 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Components\Components.hpp" />
+    <ClInclude Include="Core\ECS\ComponentArray.hpp" />
+    <ClInclude Include="Core\ECS\ComponentManager.hpp" />
+    <ClInclude Include="Core\ECS\Coordinator.hpp" />
+    <ClInclude Include="Core\ECS\EntityManager.hpp" />
+    <ClInclude Include="Core\ECS\System.hpp" />
+    <ClInclude Include="Core\ECS\SystemManager.hpp" />
+    <ClInclude Include="Core\Systems\AddingSystem.hpp" />
+    <ClInclude Include="Core\ECS\Types.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\Systems\AddingSystem.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{54998800-A1B7-4BC5-BA18-9FA7A69DF9D8}</ProjectGuid>
@@ -114,8 +129,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
