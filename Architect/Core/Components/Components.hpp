@@ -6,11 +6,6 @@ struct OneComponent
 	int num;
 };
 
-struct TwoComponent
-{
-	int numTwo;
-};
-
 struct SumComponent
 {
 	int sum;

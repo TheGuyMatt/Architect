@@ -1,8 +1,21 @@
+#include <iostream>
+#include <chrono>
+
 #include "Core/ECS/Coordinator.hpp"
 #include "Core/Components/Components.hpp"
 #include "Core/Systems/AddingSystem.hpp"
 
 Coordinator coordinator;
+
+//clock stuff
+auto start = std::chrono::steady_clock::now();
+
+float getElapsedTimeInSeconds()
+{
+	auto end = std::chrono::steady_clock::now();
+
+	return std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
+}
 
 int main()
 {
@@ -11,7 +24,6 @@ int main()
 
 	//register components with coordinator
 	coordinator.RegisterComponent<OneComponent>();
-	coordinator.RegisterComponent<TwoComponent>();
 	coordinator.RegisterComponent<SumComponent>();
 
 	//register systems with coordinator
@@ -25,7 +37,6 @@ int main()
 		Signature signature;
 
 		signature.set(coordinator.GetComponentType<OneComponent>());
-		signature.set(coordinator.GetComponentType<TwoComponent>());
 		signature.set(coordinator.GetComponentType<SumComponent>());
 
 		coordinator.SetSystemSignature<AddingSystem>(signature);
@@ -34,18 +45,44 @@ int main()
 	addingSystem->Init();
 
 	//create an entity and add components to it
-	for (unsigned int i = 1; i <= 5; i++)
+	for (unsigned int i = 1; i <= 3; i++)
 	{
 		Entity entity = coordinator.CreateEntity();
 		coordinator.AddComponent<OneComponent>(entity, { int(i) });
-		coordinator.AddComponent<TwoComponent>(entity, { int(i) });
 		coordinator.AddComponent<SumComponent>(entity, { int(0) });
 	}
 
-	float dt = 0.0f;
-	addingSystem->Update(dt);
+	//game loop
+	float dt = 1.0f / 60.0f;
+	float newTime, frameTime, interpolation;
+	float currentTime = getElapsedTimeInSeconds();
+	float accumulator = 0.0f;
 
-	system("PAUSE");
+	bool game_is_running = true;
+
+	while (game_is_running)
+	{
+		newTime = getElapsedTimeInSeconds();
+		frameTime = newTime - currentTime;
+
+		if (frameTime > 0.25f)
+			frameTime = 0.25f;
+
+		currentTime = newTime;
+		accumulator += frameTime;
+
+		while (accumulator > dt)
+		{
+			//update systems here
+			addingSystem->Update(dt);
+
+			accumulator -= dt;
+		}
+
+		interpolation = accumulator / dt;
+
+		//rendering systems goes here with interpolation
+	}
 
 	return 0;
 }
