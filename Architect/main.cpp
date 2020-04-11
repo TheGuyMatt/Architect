@@ -5,25 +5,13 @@
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
 
-#include "Core/Window.hpp"
-
-int main()
+int main(int argc, char *argv[])
 {
 	//Get SDL Ready
 	SDL_SetMainReady();
 
-	//window
-	Window window("Architect", 800, 600);
-
-	//game loop
-	while (!window.isClosed())
-	{
-		window.pollEvents();
-		window.clear();
-	}
-
 	//initialize game
-	//Game::Game();
+	Game("Architect", 800, 600);
 
 	return 0;
 }

@@ -8,20 +8,25 @@
 class Window
 {
 public:
-	Window(const std::string &title, int width, int height);
+	Window() {}
 	~Window();
+
+	void create(const std::string &title, int width, int height);
 
 	void pollEvents();
 
-	const void clear();
+	const void clear(int r, int g, int b, int a);
+	const void present();
 
 	inline const bool isClosed() { return _closed; }
+
+	inline SDL_Renderer* getRenderer() { return _renderer; }
 
 private:
 	bool Init();
 
 	SDL_Window* _window = nullptr;
-	SDL_Renderer* _renderer = nullptr;
+	SDL_Renderer * _renderer = nullptr;
 
 	std::string _title;
 	int _width = 800;

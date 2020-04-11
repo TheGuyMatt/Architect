@@ -19,22 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Components\Components.hpp" />
+    <ClInclude Include="Core\Components\ColorComponent.hpp" />
+    <ClInclude Include="Core\Components\PositionComponent.hpp" />
+    <ClInclude Include="Core\Components\SizeComponent.hpp" />
     <ClInclude Include="Core\ECS\ComponentArray.hpp" />
     <ClInclude Include="Core\ECS\ComponentManager.hpp" />
     <ClInclude Include="Core\ECS\Coordinator.hpp" />
     <ClInclude Include="Core\ECS\EntityManager.hpp" />
     <ClInclude Include="Core\ECS\System.hpp" />
     <ClInclude Include="Core\ECS\SystemManager.hpp" />
+    <ClInclude Include="Core\Systems\RenderRectSystem.hpp" />
     <ClInclude Include="Core\Window.hpp" />
     <ClInclude Include="Game.hpp" />
-    <ClInclude Include="Core\Systems\AddingSystem.hpp" />
     <ClInclude Include="Core\ECS\Types.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Systems\RenderRectSystem.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Core\Systems\AddingSystem.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

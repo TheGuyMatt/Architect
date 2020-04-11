@@ -1,18 +1,21 @@
 #include "Window.hpp"
 
-Window::Window(const std::string &title, int width, int height) :
-	_title(title), _width(width), _height(height)
-{
-	//initialize window
-	//close window if failed to initialize
-	_closed = !Init();
-}
-
 Window::~Window()
 {
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);
 	SDL_Quit();
+}
+
+void Window::create(const std::string &title, int width, int height)
+{
+	_title = title;
+	_width = width;
+	_height = height;
+
+	//initialize window
+	//close window if failed to initialize
+	_closed = !Init();
 }
 
 bool Window::Init()
@@ -55,25 +58,30 @@ void Window::pollEvents()
 			_closed = true;
 			break;
 
+		case SDL_KEYDOWN:
+			switch (evnt.key.keysym.sym)
+			{
+			case SDLK_ESCAPE:
+				_closed = true;
+				break;
+			}
+			break;
+			
+		//SDL_MOUSE will get you mouse events
+
 		default:
 			break;
 		}
 	}
 }
 
-const void Window::clear()
+const void Window::clear(int r, int g, int b, int a)
 {
-	SDL_SetRenderDrawColor(_renderer, 0, 0, 200, 255);
+	SDL_SetRenderDrawColor(_renderer, r, g, b, a);
 	SDL_RenderClear(_renderer);
+}
 
-	SDL_Rect rect;
-	rect.w = 120;
-	rect.h = 120;
-	rect.x = _width / 2 - rect.w / 2;
-	rect.y = _height / 2 - rect.h / 2;
-
-	SDL_SetRenderDrawColor(_renderer, 200, 0, 200, 255);
-	SDL_RenderFillRect(_renderer, &rect);
-
+const void Window::present()
+{
 	SDL_RenderPresent(_renderer);
 }
