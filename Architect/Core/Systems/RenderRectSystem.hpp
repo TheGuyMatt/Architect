@@ -4,7 +4,7 @@
 #include <SDL.h>
 
 #include "../ECS/System.hpp"
-#include "../ECS/Coordinator.hpp"
+#include "../Coordinator.hpp"
 
 class RenderRectSystem : public System
 {

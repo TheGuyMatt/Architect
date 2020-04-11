@@ -9,7 +9,7 @@ float Game::getElapsedClockTime()
 
 Game::Game(const std::string &title, int width, int height)
 {
-	_window->create("Architect", width, height);
+	_window->create(title, width, height);
 
 	//initialize coordinator
 	_coordinator.Init();
@@ -19,6 +19,7 @@ Game::Game(const std::string &title, int width, int height)
 	_coordinator.RegisterComponent<PositionComponent>();
 	_coordinator.RegisterComponent<SizeComponent>();
 	_coordinator.RegisterComponent<ColorComponent>();
+	_coordinator.RegisterComponent<PlayerComponent>();
 
 	/* register systems
 	system = coordinator.RegisterSystem<SYSTEM>();
@@ -49,6 +50,17 @@ Game::Game(const std::string &title, int width, int height)
 	}
 	renderRectsystem->Init(&_coordinator, _window->getRenderer());
 
+	playerInputSystem = _coordinator.RegisterSystem<PlayerInputSystem>();
+	{
+		Signature signature;
+
+		signature.set(_coordinator.GetComponentType<PositionComponent>());
+		signature.set(_coordinator.GetComponentType<PlayerComponent>());
+
+		_coordinator.SetSystemSignature<PlayerInputSystem>(signature);
+	}
+	playerInputSystem->Init(&_coordinator);
+
 	this->Run();
 }
 
@@ -63,6 +75,7 @@ void Game::Run()
 	_coordinator.AddComponent<PositionComponent>(entity, { int(100), int(100)});
 	_coordinator.AddComponent<SizeComponent>(entity, { int(120), int(120) });
 	_coordinator.AddComponent<ColorComponent>(entity, { int(200), int(0), int(200), int(255) });
+	_coordinator.AddComponent<PlayerComponent>(entity, {});
 
 	//game loop
 	float dt = 1.0f / 60.0f;
@@ -83,10 +96,12 @@ void Game::Run()
 
 		while (accumulator > dt)
 		{
+			//input systems here
 			_window->pollEvents();
 
 			//update systems here
 			//system->Update(dt);
+			//playerInputSystem->Update(dt);
 
 			accumulator -= dt;
 		}

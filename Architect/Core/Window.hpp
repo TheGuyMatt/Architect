@@ -19,6 +19,7 @@ public:
 	const void present();
 
 	inline const bool isClosed() { return _closed; }
+	inline const void close() { _closed = true; }
 
 	inline SDL_Renderer* getRenderer() { return _renderer; }
 

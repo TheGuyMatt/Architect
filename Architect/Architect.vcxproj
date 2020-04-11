@@ -20,20 +20,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Components\ColorComponent.hpp" />
+    <ClInclude Include="Core\Components\PlayerComponent.hpp" />
     <ClInclude Include="Core\Components\PositionComponent.hpp" />
     <ClInclude Include="Core\Components\SizeComponent.hpp" />
     <ClInclude Include="Core\ECS\ComponentArray.hpp" />
     <ClInclude Include="Core\ECS\ComponentManager.hpp" />
-    <ClInclude Include="Core\ECS\Coordinator.hpp" />
+    <ClInclude Include="Core\Coordinator.hpp" />
     <ClInclude Include="Core\ECS\EntityManager.hpp" />
     <ClInclude Include="Core\ECS\System.hpp" />
     <ClInclude Include="Core\ECS\SystemManager.hpp" />
+    <ClInclude Include="Core\Events\Event.hpp" />
+    <ClInclude Include="Core\Events\EventDependencies.hpp" />
+    <ClInclude Include="Core\Events\EventManager.hpp" />
+    <ClInclude Include="Core\Systems\PlayerInputSystem.hpp" />
     <ClInclude Include="Core\Systems\RenderRectSystem.hpp" />
     <ClInclude Include="Core\Window.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Core\ECS\Types.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Systems\PlayerInputSystem.cpp" />
     <ClCompile Include="Core\Systems\RenderRectSystem.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Game.cpp" />

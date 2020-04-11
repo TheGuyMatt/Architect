@@ -3,11 +3,11 @@
 
 //https://austinmorlan.com/posts/entity_component_system/
 
-#include "ComponentManager.hpp"
-#include "EntityManager.hpp"
-//#include "EventManager.hpp"
-#include "SystemManager.hpp"
-#include "Types.hpp"
+#include "ECS/ComponentManager.hpp"
+#include "ECS/EntityManager.hpp"
+#include "Events/EventManager.hpp"
+#include "ECS/SystemManager.hpp"
+#include "ECS/Types.hpp"
 #include <memory>
 
 
@@ -18,7 +18,7 @@ public:
 	{
 		mComponentManager = std::make_unique<ComponentManager>();
 		mEntityManager = std::make_unique<EntityManager>();
-		//mEventManager = std::make_unique<EventManager>();
+		mEventManager = std::make_unique<EventManager>();
 		mSystemManager = std::make_unique<SystemManager>();
 	}
 
@@ -98,7 +98,6 @@ public:
 
 
 	// Event methods
-	/*
 	void AddEventListener(EventId eventId, std::function<void(Event&)> const& listener)
 	{
 		mEventManager->AddListener(eventId, listener);
@@ -113,12 +112,11 @@ public:
 	{
 		mEventManager->SendEvent(eventId);
 	}
-	*/
 
 private:
 	std::unique_ptr<ComponentManager> mComponentManager;
 	std::unique_ptr<EntityManager> mEntityManager;
-	//std::unique_ptr<EventManager> mEventManager;
+	std::unique_ptr<EventManager> mEventManager;
 	std::unique_ptr<SystemManager> mSystemManager;
 };
 

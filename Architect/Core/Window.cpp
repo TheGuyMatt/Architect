@@ -66,11 +66,6 @@ void Window::pollEvents()
 				break;
 			}
 			break;
-			
-		//SDL_MOUSE will get you mouse events
-
-		default:
-			break;
 		}
 	}
 }

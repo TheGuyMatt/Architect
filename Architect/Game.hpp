@@ -8,11 +8,15 @@
 #include "Core/Window.hpp"
 
 //ECS
-#include "Core/ECS/Coordinator.hpp"
+#include "Core/Coordinator.hpp"
+//Systems
 #include "Core/Systems/RenderRectSystem.hpp"
+#include "Core/Systems/PlayerInputSystem.hpp"
+//Components
 #include "Core/Components/PositionComponent.hpp"
 #include "Core/Components/SizeComponent.hpp"
 #include "Core/Components/ColorComponent.hpp"
+#include "Core/Components/PlayerComponent.hpp"
 
 typedef std::shared_ptr<Window> WindowRef;
 
@@ -31,6 +35,7 @@ private:
 	//systems
 	//std::shared_ptr<SYSTEM> system;
 	std::shared_ptr<RenderRectSystem> renderRectsystem;
+	std::shared_ptr<PlayerInputSystem> playerInputSystem;
 
 	//clock stuff
 	std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
