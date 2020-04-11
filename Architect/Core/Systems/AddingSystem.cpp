@@ -2,9 +2,9 @@
 
 #include "../Components/Components.hpp"
 
-void AddingSystem::Init(Coordinator* coord)
+void AddingSystem::Init(Coordinator* coordinator)
 {
-	coordinator = coord;
+	_coordinator = coordinator;
 }
 
 void AddingSystem::Update(float dt)
@@ -13,8 +13,8 @@ void AddingSystem::Update(float dt)
 
 	for (auto const& entity : mEntities)
 	{
-		auto& oneComponent = coordinator->GetComponent<OneComponent>(entity);
-		auto& sumComponent = coordinator->GetComponent<SumComponent>(entity);
+		auto& oneComponent = _coordinator->GetComponent<OneComponent>(entity);
+		auto& sumComponent = _coordinator->GetComponent<SumComponent>(entity);
 
 		sumComponent.sum = oneComponent.num + sumComponent.sum;
 		std::cout << sumComponent.sum << std::endl;

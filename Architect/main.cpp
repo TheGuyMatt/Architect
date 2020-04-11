@@ -1,20 +1,24 @@
 #include <iostream>
-#include "Core/Game.hpp"
+#include "Game.hpp"
 
 //Include SDL
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
+
+#include "Core/Window.hpp"
 
 int main()
 {
 	//Get SDL Ready
 	SDL_SetMainReady();
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+	//window
+	Window window("Architect", 800, 600);
+
+	while (!window.isClosed())
 	{
-		std::cerr << "SDL Failed to initialize\n";
+		window.pollEvents();
 	}
-	else std::cout << "SDL initialized\n";
 
 	//initialize game
 	//Game::Game();

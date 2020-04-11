@@ -4,9 +4,9 @@
 #include <iostream>
 #include <chrono>
 
-#include "ECS/Coordinator.hpp"
-#include "Components/Components.hpp"
-#include "Systems/AddingSystem.hpp"
+#include "Core/ECS/Coordinator.hpp"
+#include "Core/Components/Components.hpp"
+#include "Core/Systems/AddingSystem.hpp"
 
 class Game
 {

@@ -7,11 +7,11 @@
 class AddingSystem : public System
 {
 public:
-	void Init(Coordinator* coord);
+	void Init(Coordinator* coordinator);
 	void Update(float dt);
 
 private:
-	Coordinator* coordinator;
+	Coordinator* _coordinator;
 };
 
 #endif
