@@ -12,12 +12,16 @@ public:
 	~Window();
 
 	void pollEvents();
+
+	const void clear();
+
 	inline const bool isClosed() { return _closed; }
 
 private:
 	bool Init();
 
 	SDL_Window* _window = nullptr;
+	SDL_Renderer* _renderer = nullptr;
 
 	std::string _title;
 	int _width = 800;

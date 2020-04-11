@@ -15,9 +15,11 @@ int main()
 	//window
 	Window window("Architect", 800, 600);
 
+	//game loop
 	while (!window.isClosed())
 	{
 		window.pollEvents();
+		window.clear();
 	}
 
 	//initialize game
