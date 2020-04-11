@@ -31,6 +31,7 @@ Game::Game()
 
 		coordinator.SetSystemSignature<AddingSystem>(signature);
 	}
+	//each system needs a reference to coordinator to work
 	addingSystem->Init(&coordinator);
 
 	this->Run();
