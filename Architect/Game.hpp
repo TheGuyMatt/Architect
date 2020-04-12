@@ -18,7 +18,8 @@
 #include "Core/Components/ColorComponent.hpp"
 #include "Core/Components/PlayerComponent.hpp"
 
-typedef std::shared_ptr<Window> WindowRef;
+//typedef std::shared_ptr<Window> WindowRef;
+//WindowRef _window = std::make_shared<Window>();
 
 class Game
 {
@@ -27,7 +28,7 @@ public:
 
 private:
 	//window
-	WindowRef _window = std::make_shared<Window>();
+	Window _window;
 
 	//coordinator
 	Coordinator _coordinator;

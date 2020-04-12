@@ -21,12 +21,15 @@ using ParamId = std::uint32_t;
 #define METHOD_LISTENER(EventType, Listener) EventType, std::bind(&Listener, this, std::placeholders::_1)
 #define FUNCTION_LISTENER(EventType, Listener) EventType, std::bind(&Listener, std::placeholders::_1)
 
+//Integral constant overflow (warning C4307) is being ignored here
+#ifdef _MSC_VER
+#   pragma warning( push )
+#   pragma warning( disable: 4307 )
 namespace Events
 {
 	namespace Window
 	{
 		const EventId QUIT = "Events::Window::QUIT"_hash;
-		const EventId RESIZED = "Events::Window::RESIZED"_hash;
 		const EventId INPUT = "Events::Window::INPUT"_hash;
 
 		namespace Input
@@ -35,5 +38,21 @@ namespace Events
 		}
 	}
 }
+#   pragma warning( pop )
+#else
+namespace Events
+{
+	namespace Window
+	{
+		const EventId QUIT = "Events::Window::QUIT"_hash;
+		const EventId INPUT = "Events::Window::INPUT"_hash;
+
+		namespace Input
+		{
+			const ParamId INPUT = "Events::Window::Input::INPUT"_hash;
+		}
+	}
+}
+#endif
 
 #endif

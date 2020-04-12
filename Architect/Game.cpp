@@ -9,34 +9,18 @@ float Game::getElapsedClockTime()
 
 Game::Game(const std::string &title, int width, int height)
 {
-	_window->create(title, width, height);
+	_window.create(title, width, height, &_coordinator);
 
 	//initialize coordinator
 	_coordinator.Init();
 
 	//register components with coordinator
-	//coordinator.RegisterComponent<COMPONENT>();
 	_coordinator.RegisterComponent<PositionComponent>();
 	_coordinator.RegisterComponent<SizeComponent>();
 	_coordinator.RegisterComponent<ColorComponent>();
 	_coordinator.RegisterComponent<PlayerComponent>();
 
-	/* register systems
-	system = coordinator.RegisterSystem<SYSTEM>();
-	{
-		//a systems signature are the components that 
-		//an entity has to have in order to be passed
-		//through the system
-
-		Signature signature;
-
-		signature.set(coordinator.GetComponentType<COMPONENT>());
-
-		coordinator.SetSystemSignature<SYSTEM>(signature);
-	}
-	//each system needs a reference to coordinator to work
-	addingSystem->Init(&coordinator);
-	*/
+	//register systems
 
 	renderRectsystem = _coordinator.RegisterSystem<RenderRectSystem>();
 	{
@@ -48,7 +32,7 @@ Game::Game(const std::string &title, int width, int height)
 
 		_coordinator.SetSystemSignature<RenderRectSystem>(signature);
 	}
-	renderRectsystem->Init(&_coordinator, _window->getRenderer());
+	renderRectsystem->Init(&_coordinator, _window.getRenderer());
 
 	playerInputSystem = _coordinator.RegisterSystem<PlayerInputSystem>();
 	{
@@ -66,10 +50,7 @@ Game::Game(const std::string &title, int width, int height)
 
 void Game::Run()
 {
-	/* create an entity and add components to it
-	Entity entity = coordinator.CreateEntity();
-	coordinator.AddComponent<COMPONENT>(entity, { int(i) });
-	*/
+	//create an entity and add components to it
 
 	Entity entity = _coordinator.CreateEntity();
 	_coordinator.AddComponent<PositionComponent>(entity, { int(100), int(100)});
@@ -83,7 +64,7 @@ void Game::Run()
 	float currentTime = this->getElapsedClockTime();
 	float accumulator = 0.0f;
 
-	while (!_window->isClosed())
+	while (!_window.isClosed())
 	{
 		newTime = this->getElapsedClockTime();
 		frameTime = newTime - currentTime;
@@ -96,11 +77,10 @@ void Game::Run()
 
 		while (accumulator > dt)
 		{
-			//input systems here
-			_window->pollEvents();
+			//window polls events, such as when a key is pressed
+			_window.pollEvents();
 
 			//update systems here
-			//system->Update(dt);
 			//playerInputSystem->Update(dt);
 
 			accumulator -= dt;
@@ -108,11 +88,11 @@ void Game::Run()
 
 		interpolation = accumulator / dt;
 
-		//rendering systems goes here with interpolation
-		_window->clear(0, 0, 0, 255);
+		//rendering systems go here with interpolation
+		_window.clear(0, 0, 0, 255);
 
 		renderRectsystem->Update(interpolation);
 
-		_window->present();
+		_window.present();
 	}
 }

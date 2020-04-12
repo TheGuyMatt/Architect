@@ -32,6 +32,7 @@
     <ClInclude Include="Core\Events\Event.hpp" />
     <ClInclude Include="Core\Events\EventDependencies.hpp" />
     <ClInclude Include="Core\Events\EventManager.hpp" />
+    <ClInclude Include="Core\Input\InputButtons.hpp" />
     <ClInclude Include="Core\Systems\PlayerInputSystem.hpp" />
     <ClInclude Include="Core\Systems\RenderRectSystem.hpp" />
     <ClInclude Include="Core\Window.hpp" />
@@ -110,6 +111,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -132,6 +134,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
