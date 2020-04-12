@@ -34,6 +34,9 @@
     <ClInclude Include="Core\Events\EventManager.hpp" />
     <ClInclude Include="Core\Input\InputButtons.hpp" />
     <ClInclude Include="Core\Input\InputManager.hpp" />
+    <ClInclude Include="Core\Math\Vector2.hpp" />
+    <ClInclude Include="Core\Math\Vector3.hpp" />
+    <ClInclude Include="Core\Math\Vector4.hpp" />
     <ClInclude Include="Core\Systems\PlayerInputSystem.hpp" />
     <ClInclude Include="Core\Systems\RenderRectSystem.hpp" />
     <ClInclude Include="Core\Window.hpp" />
