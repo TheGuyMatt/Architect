@@ -33,6 +33,7 @@
     <ClInclude Include="Core\Events\EventDependencies.hpp" />
     <ClInclude Include="Core\Events\EventManager.hpp" />
     <ClInclude Include="Core\Input\InputButtons.hpp" />
+    <ClInclude Include="Core\Input\InputManager.hpp" />
     <ClInclude Include="Core\Systems\PlayerInputSystem.hpp" />
     <ClInclude Include="Core\Systems\RenderRectSystem.hpp" />
     <ClInclude Include="Core\Window.hpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Core\ECS\Types.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Input\InputManager.cpp" />
     <ClCompile Include="Core\Systems\PlayerInputSystem.cpp" />
     <ClCompile Include="Core\Systems\RenderRectSystem.cpp" />
     <ClCompile Include="Core\Window.cpp" />

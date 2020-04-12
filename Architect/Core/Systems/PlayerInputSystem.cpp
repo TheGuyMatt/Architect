@@ -3,9 +3,16 @@
 #include "../Components/PositionComponent.hpp"
 #include "../Components/PlayerComponent.hpp"
 
+#include "../Input/InputButtons.hpp"
+
 void PlayerInputSystem::Init(Coordinator *coordinator)
 {
 	_coordinator = coordinator;
+
+	if (_coordinator != nullptr)
+	{
+		_coordinator->AddEventListener(METHOD_LISTENER(Events::Window::INPUT, PlayerInputSystem::InputListener));
+	}
 }
 
 void PlayerInputSystem::Update(float dt)
@@ -15,35 +22,15 @@ void PlayerInputSystem::Update(float dt)
 		//auto& playerComp = _coordinator->GetComponent<PlayerComponent>(entity);
 		auto& posComp = _coordinator->GetComponent<PositionComponent>(entity);
 
-		SDL_Event evnt;
-		if (SDL_PollEvent(&evnt))
-		{
-			switch (evnt.type)
-			{
-			case SDL_KEYDOWN:
-				switch (evnt.key.keysym.sym)
-				{
-				case SDLK_LEFT:
-					posComp.x -= 10;
-					break;
-				case SDLK_RIGHT:
-					posComp.x += 10;
-					break;
-				case SDLK_UP:
-					posComp.y -= 10;
-					break;
-				case SDLK_DOWN:
-					posComp.y += 10;
-					break;
+		if (_buttons.test(static_cast<std::size_t>(InputButtons::A))) posComp.x -= 10;
+		else if (_buttons.test(static_cast<std::size_t>(InputButtons::D))) posComp.x += 10;
 
-				default:
-					break;
-				}
-				break;
-
-			default:
-				break;
-			}
-		}
+		if (_buttons.test(static_cast<std::size_t>(InputButtons::W))) posComp.y -= 10;
+		else if (_buttons.test(static_cast<std::size_t>(InputButtons::S))) posComp.y += 10;
 	}
+}
+
+void PlayerInputSystem::InputListener(Event &event)
+{
+	_buttons = event.GetParam<std::bitset<8>>(Events::Window::Input::INPUT);
 }

@@ -1,18 +1,21 @@
 #include "Game.hpp"
 
-float Game::getElapsedClockTime()
-{
-	auto end = std::chrono::steady_clock::now();
-
-	return (float)std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
-}
+#include <chrono>
+using namespace std::chrono_literals;
+//fixed time step of 1 / (60 fps)
+constexpr std::chrono::nanoseconds timestep(16ms);
+const float dt = 1.0f / 60.0f;
 
 Game::Game(const std::string &title, int width, int height)
 {
-	_window.create(title, width, height, &_coordinator);
+	//create window
+	_window.create(title, width, height);
 
 	//initialize coordinator
 	_coordinator.Init();
+
+	//initialize inputManager
+	_inputManager.Init(&_coordinator, &_window);
 
 	//register components with coordinator
 	_coordinator.RegisterComponent<PositionComponent>();
@@ -21,7 +24,6 @@ Game::Game(const std::string &title, int width, int height)
 	_coordinator.RegisterComponent<PlayerComponent>();
 
 	//register systems
-
 	renderRectsystem = _coordinator.RegisterSystem<RenderRectSystem>();
 	{
 		Signature signature;
@@ -59,36 +61,31 @@ void Game::Run()
 	_coordinator.AddComponent<PlayerComponent>(entity, {});
 
 	//game loop
-	float dt = 1.0f / 60.0f;
-	float newTime, frameTime, interpolation;
-	float currentTime = this->getElapsedClockTime();
-	float accumulator = 0.0f;
+	using clock = std::chrono::high_resolution_clock;
+	std::chrono::nanoseconds lag(0ms);
+	auto previousTime = clock::now();
 
 	while (!_window.isClosed())
 	{
-		newTime = this->getElapsedClockTime();
-		frameTime = newTime - currentTime;
+		auto currentTime = clock::now();
+		auto elapsedTime = currentTime - previousTime;
+		previousTime = currentTime;
+		lag += std::chrono::duration_cast<std::chrono::nanoseconds>(elapsedTime);
 
-		if (frameTime > 0.25f)
-			frameTime = 0.25f;
+		//input/events
+		_inputManager.Update();
 
-		currentTime = newTime;
-		accumulator += frameTime;
-
-		while (accumulator > dt)
+		while (lag >= timestep)
 		{
-			//window polls events, such as when a key is pressed
-			_window.pollEvents();
+			//logic updates
+			playerInputSystem->Update(dt);
 
-			//update systems here
-			//playerInputSystem->Update(dt);
-
-			accumulator -= dt;
+			lag -= timestep;
 		}
 
-		interpolation = accumulator / dt;
+		float interpolation = static_cast<float>(lag / timestep);
 
-		//rendering systems go here with interpolation
+		//render with interpolation
 		_window.clear(0, 0, 0, 255);
 
 		renderRectsystem->Update(interpolation);

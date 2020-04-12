@@ -2,7 +2,6 @@
 #define GAME_HPP
 
 #include <iostream>
-#include <chrono>
 
 //window
 #include "Core/Window.hpp"
@@ -18,6 +17,9 @@
 #include "Core/Components/ColorComponent.hpp"
 #include "Core/Components/PlayerComponent.hpp"
 
+//input
+#include "Core/Input/InputManager.hpp"
+
 //typedef std::shared_ptr<Window> WindowRef;
 //WindowRef _window = std::make_shared<Window>();
 
@@ -27,20 +29,14 @@ public:
 	Game(const std::string &title, int width, int height);
 
 private:
-	//window
 	Window _window;
-
-	//coordinator
 	Coordinator _coordinator;
+	InputManager _inputManager;
 
 	//systems
 	//std::shared_ptr<SYSTEM> system;
 	std::shared_ptr<RenderRectSystem> renderRectsystem;
 	std::shared_ptr<PlayerInputSystem> playerInputSystem;
-
-	//clock stuff
-	std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-	float getElapsedClockTime();
 
 	void Run();
 };

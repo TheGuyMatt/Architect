@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include <SDL.h>
-#include "Coordinator.hpp"
 #include <bitset>
 
 class Window
@@ -13,9 +12,7 @@ public:
 	Window() {}
 	~Window();
 
-	void create(const std::string &title, int width, int height, Coordinator *coordinator);
-
-	void pollEvents();
+	void create(const std::string &title, int width, int height);
 
 	const void clear(int r, int g, int b, int a);
 	const void present();
@@ -30,11 +27,6 @@ private:
 
 	SDL_Window* _window = nullptr;
 	SDL_Renderer * _renderer = nullptr;
-
-	Coordinator *_coordinator;
-
-	std::bitset<8> _buttons;
-	bool _buttonStateChanged = true;
 
 	std::string _title;
 	int _width = 800;

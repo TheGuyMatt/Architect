@@ -13,7 +13,11 @@ public:
 	void Update(float dt);
 
 private:
-	Coordinator *_coordinator;
+	Coordinator *_coordinator = nullptr;
+
+	//input variables
+	std::bitset<8> _buttons;
+	void InputListener(Event &event);
 };
 
 #endif

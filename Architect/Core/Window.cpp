@@ -9,12 +9,11 @@ Window::~Window()
 	SDL_Quit();
 }
 
-void Window::create(const std::string &title, int width, int height, Coordinator *coordinator)
+void Window::create(const std::string &title, int width, int height)
 {
 	_title = title;
 	_width = width;
 	_height = height;
-	_coordinator = coordinator;
 
 	//initialize window
 	//close window if failed to initialize
@@ -47,89 +46,6 @@ bool Window::Init()
 	}
 
 	return true;
-}
-
-void Window::pollEvents()
-{
-	SDL_Event evnt;
-
-	if (SDL_PollEvent(&evnt))
-	{
-		switch (evnt.type)
-		{
-		case SDL_QUIT:
-			_closed = true;
-			break;
-
-		case SDL_KEYDOWN:
-			_buttonStateChanged = true;
-			switch (evnt.key.keysym.sym)
-			{
-
-			case SDLK_ESCAPE:
-				_closed = true;
-				break;
-			case SDLK_w:
-				_buttons.set(static_cast<std::size_t>(InputButtons::W));
-				break;
-			case SDLK_a:
-				_buttons.set(static_cast<std::size_t>(InputButtons::A));
-				break;
-			case SDLK_s:
-				_buttons.set(static_cast<std::size_t>(InputButtons::S));
-				break;
-			case SDLK_d:
-				_buttons.set(static_cast<std::size_t>(InputButtons::D));
-				break;
-			default:
-				_buttonStateChanged = false;
-				break;
-
-				if (_buttonStateChanged)
-				{
-					Event event(Events::Window::INPUT);
-					event.SetParam(Events::Window::Input::INPUT, _buttons);
-					_coordinator->SendEvent(event);
-				}
-			}
-			break;
-
-		case SDL_KEYUP:
-			_buttonStateChanged = true;
-			switch (evnt.key.keysym.sym)
-			{
-			case SDLK_ESCAPE:
-				_closed = true;
-				break;
-			case SDLK_w:
-				_buttons.reset(static_cast<std::size_t>(InputButtons::W));
-				break;
-			case SDLK_a:
-				_buttons.reset(static_cast<std::size_t>(InputButtons::A));
-				break;
-			case SDLK_s:
-				_buttons.reset(static_cast<std::size_t>(InputButtons::S));
-				break;
-			case SDLK_d:
-				_buttons.reset(static_cast<std::size_t>(InputButtons::D));
-				break;
-			default:
-				_buttonStateChanged = false;
-				break;
-
-				if (_buttonStateChanged)
-				{
-					Event event(Events::Window::INPUT);
-					event.SetParam(Events::Window::Input::INPUT, _buttons);
-					_coordinator->SendEvent(event);
-				}
-			}
-			break;
-
-		default:
-			break;
-		}
-	}
 }
 
 const void Window::clear(int r, int g, int b, int a)
