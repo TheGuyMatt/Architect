@@ -19,7 +19,7 @@ Game::Game(const std::string &title, int width, int height)
 	_coordinator.AddEventListener(FUNCTION_LISTENER(Events::Window::QUIT, QuitHandler));
 
 	//create window
-	_window.create(title, width, height);
+	_window.create(title, width, height, &_coordinator);
 
 	//initialize inputManager
 	_inputManager.Init(&_coordinator);
