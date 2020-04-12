@@ -42,6 +42,9 @@ private:
 	std::shared_ptr<RenderRectSystem> renderRectsystem;
 	std::shared_ptr<PlayerInputSystem> playerInputSystem;
 
+	void registerComponents();
+	void registerSystems();
+
 	void Run();
 };
 

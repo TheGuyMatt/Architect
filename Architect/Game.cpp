@@ -25,12 +25,24 @@ Game::Game(const std::string &title, int width, int height)
 	_inputManager.Init(&_coordinator);
 
 	//register components with coordinator
+	this->registerComponents();
+
+	//register systems with coordinator
+	this->registerSystems();
+
+	this->Run();
+}
+
+void Game::registerComponents()
+{
 	_coordinator.RegisterComponent<PositionComponent>();
 	_coordinator.RegisterComponent<SizeComponent>();
 	_coordinator.RegisterComponent<ColorComponent>();
 	_coordinator.RegisterComponent<PlayerComponent>();
+}
 
-	//register systems
+void Game::registerSystems()
+{
 	renderRectsystem = _coordinator.RegisterSystem<RenderRectSystem>();
 	{
 		Signature signature;
@@ -53,8 +65,6 @@ Game::Game(const std::string &title, int width, int height)
 		_coordinator.SetSystemSignature<PlayerInputSystem>(signature);
 	}
 	playerInputSystem->Init(&_coordinator);
-
-	this->Run();
 }
 
 void Game::Run()
