@@ -12,17 +12,17 @@ void QuitHandler(Event &event) { running = false; }
 
 Game::Game(const std::string &title, int width, int height)
 {
-	//create window
-	_window.create(title, width, height);
-
 	//initialize coordinator
 	_coordinator.Init();
 
-	//initialize inputManager
-	_inputManager.Init(&_coordinator);
-
 	//register quit event with coordinator
 	_coordinator.AddEventListener(FUNCTION_LISTENER(Events::Window::QUIT, QuitHandler));
+
+	//create window
+	_window.create(title, width, height);
+
+	//initialize inputManager
+	_inputManager.Init(&_coordinator);
 
 	//register components with coordinator
 	_coordinator.RegisterComponent<PositionComponent>();

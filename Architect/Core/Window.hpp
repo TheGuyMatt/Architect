@@ -5,6 +5,7 @@
 #include <string>
 #include <SDL.h>
 #include <bitset>
+#include "Coordinator.hpp"
 
 class Window
 {
@@ -12,7 +13,7 @@ public:
 	Window() {}
 	~Window();
 
-	void create(const std::string &title, int width, int height);
+	void create(const std::string &title, int width, int height, Coordinator *coordinator);
 
 	const void clear(int r, int g, int b, int a);
 	const void present();
@@ -27,6 +28,7 @@ private:
 
 	SDL_Window* _window = nullptr;
 	SDL_Renderer * _renderer = nullptr;
+	Coordinator *_coordinator;
 
 	std::string _title;
 	int _width = 800;

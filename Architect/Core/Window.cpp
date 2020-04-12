@@ -9,15 +9,18 @@ Window::~Window()
 	SDL_Quit();
 }
 
-void Window::create(const std::string &title, int width, int height)
+void Window::create(const std::string &title, int width, int height, Coordinator *coordinator)
 {
 	_title = title;
 	_width = width;
 	_height = height;
+	_coordinator = coordinator;
 
 	//initialize window
 	//close window if failed to initialize
 	_closed = !Init();
+	//tell coordinator to quit if window closed during initialization
+	if (_closed) _coordinator->SendEvent(Events::Window::QUIT);
 }
 
 bool Window::Init()
