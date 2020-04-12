@@ -1,9 +1,8 @@
 #include "InputManager.hpp"
 
-void InputManager::Init(Coordinator *coordinator, Window *window)
+void InputManager::Init(Coordinator *coordinator)
 {
 	_coordinator = coordinator;
-	_window = window;
 }
 
 void InputManager::Update()
@@ -15,7 +14,7 @@ void InputManager::Update()
 		switch (evnt.type)
 		{
 		case SDL_QUIT:
-			_window->close();
+			_coordinator->SendEvent(Events::Window::QUIT);
 			break;
 
 		case SDL_KEYDOWN:
@@ -23,7 +22,7 @@ void InputManager::Update()
 			{
 
 			case SDLK_ESCAPE:
-				_window->close();
+				_coordinator->SendEvent(Events::Window::QUIT);
 				break;
 			case SDLK_w:
 				_buttons.set(static_cast<std::size_t>(InputButtons::W));
@@ -47,7 +46,7 @@ void InputManager::Update()
 			switch (evnt.key.keysym.sym)
 			{
 			case SDLK_ESCAPE:
-				_window->close();
+				_coordinator->SendEvent(Events::Window::QUIT);
 				break;
 			case SDLK_w:
 				_buttons.reset(static_cast<std::size_t>(InputButtons::W));
@@ -84,5 +83,4 @@ void InputManager::buttonEvent()
 	Event event(Events::Window::INPUT);
 	event.SetParam(Events::Window::Input::INPUT, _buttons);
 	_coordinator->SendEvent(event);
-	std::cout << "Input event sent\n";
 }

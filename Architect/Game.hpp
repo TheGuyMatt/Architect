@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <iostream>
+#include <chrono>
 
 //window
 #include "Core/Window.hpp"
@@ -17,7 +18,10 @@
 #include "Core/Components/ColorComponent.hpp"
 #include "Core/Components/PlayerComponent.hpp"
 
-//input
+//Events
+#include "Core/Events/EventDependencies.hpp"
+
+//Input
 #include "Core/Input/InputManager.hpp"
 
 //typedef std::shared_ptr<Window> WindowRef;

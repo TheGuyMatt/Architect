@@ -14,12 +14,11 @@ public:
 	InputManager() {}
 	~InputManager() {}
 
-	void Init(Coordinator *coordinator, Window *window);
+	void Init(Coordinator *coordinator);
 	void Update();
 
 private:
 	Coordinator *_coordinator;
-	Window *_window;
 
 	SDL_Event evnt;
 

@@ -1,7 +1,7 @@
 #ifndef EVENDEPENDENCIES_HPP
 #define EVENDEPENDENCIES_HPP
 
-#include <iostream>
+#include <cstdint>
 #include <bitset>
 
 // Source: https://gist.github.com/Lee-R/3839813

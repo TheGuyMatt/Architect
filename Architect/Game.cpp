@@ -1,10 +1,14 @@
 #include "Game.hpp"
 
-#include <chrono>
 using namespace std::chrono_literals;
 //fixed time step of 1 / (60 fps)
 constexpr std::chrono::nanoseconds timestep(16ms);
 const float dt = 1.0f / 60.0f;
+
+//keeps game loop running
+static bool running = true;
+//handler for quit event
+void QuitHandler(Event &event) { running = false; }
 
 Game::Game(const std::string &title, int width, int height)
 {
@@ -15,7 +19,10 @@ Game::Game(const std::string &title, int width, int height)
 	_coordinator.Init();
 
 	//initialize inputManager
-	_inputManager.Init(&_coordinator, &_window);
+	_inputManager.Init(&_coordinator);
+
+	//register quit event with coordinator
+	_coordinator.AddEventListener(FUNCTION_LISTENER(Events::Window::QUIT, QuitHandler));
 
 	//register components with coordinator
 	_coordinator.RegisterComponent<PositionComponent>();
@@ -65,7 +72,7 @@ void Game::Run()
 	std::chrono::nanoseconds lag(0ms);
 	auto previousTime = clock::now();
 
-	while (!_window.isClosed())
+	while (running)
 	{
 		auto currentTime = clock::now();
 		auto elapsedTime = currentTime - previousTime;
@@ -92,4 +99,6 @@ void Game::Run()
 
 		_window.present();
 	}
+
+	_window.close();
 }
