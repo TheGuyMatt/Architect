@@ -1,7 +1,7 @@
 #include "PlayerInputSystem.hpp"
 
-#include "../Components/PositionComponent.hpp"
-#include "../Components/PlayerComponent.hpp"
+#include "../Components/Transform.hpp"
+#include "../Components/Player.hpp"
 
 #include "../Input/InputButtons.hpp"
 
@@ -19,14 +19,15 @@ void PlayerInputSystem::Update(float dt)
 {
 	for (auto const& entity : mEntities)
 	{
-		//auto& playerComp = _coordinator->GetComponent<PlayerComponent>(entity);
-		auto& posComp = _coordinator->GetComponent<PositionComponent>(entity);
+		//auto& playerComp = _coordinator->GetComponent<Player>(entity);
+		auto& transform = _coordinator->GetComponent<Transform>(entity);
 
-		if (_buttons.test(static_cast<std::size_t>(InputButtons::A))) posComp.x -= 10;
-		else if (_buttons.test(static_cast<std::size_t>(InputButtons::D))) posComp.x += 10;
+		float speed = 10;
+		if (_buttons.test(static_cast<std::size_t>(InputButtons::A))) transform.position.x -= speed;
+		else if (_buttons.test(static_cast<std::size_t>(InputButtons::D))) transform.position.x += speed;
 
-		if (_buttons.test(static_cast<std::size_t>(InputButtons::W))) posComp.y -= 10;
-		else if (_buttons.test(static_cast<std::size_t>(InputButtons::S))) posComp.y += 10;
+		if (_buttons.test(static_cast<std::size_t>(InputButtons::W))) transform.position.y -= speed;
+		else if (_buttons.test(static_cast<std::size_t>(InputButtons::S))) transform.position.y += speed;
 	}
 }
 

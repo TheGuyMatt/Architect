@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Components\ColorComponent.hpp" />
-    <ClInclude Include="Core\Components\PlayerComponent.hpp" />
-    <ClInclude Include="Core\Components\PositionComponent.hpp" />
-    <ClInclude Include="Core\Components\SizeComponent.hpp" />
+    <ClInclude Include="Core\Components\Player.hpp" />
+    <ClInclude Include="Core\Components\Renderable.hpp" />
+    <ClInclude Include="Core\Components\RidgidBody.hpp" />
+    <ClInclude Include="Core\Components\Transform.hpp" />
     <ClInclude Include="Core\ECS\ComponentArray.hpp" />
     <ClInclude Include="Core\ECS\ComponentManager.hpp" />
     <ClInclude Include="Core\Coordinator.hpp" />
@@ -34,9 +34,12 @@
     <ClInclude Include="Core\Events\EventManager.hpp" />
     <ClInclude Include="Core\Input\InputButtons.hpp" />
     <ClInclude Include="Core\Input\InputManager.hpp" />
-    <ClInclude Include="Core\Math\Vector2.hpp" />
-    <ClInclude Include="Core\Math\Vector3.hpp" />
-    <ClInclude Include="Core\Math\Vector4.hpp" />
+    <ClInclude Include="Core\Math\Math.hpp" />
+    <ClInclude Include="Core\Math\Vector2f.hpp" />
+    <ClInclude Include="Core\Math\Vector2i.hpp" />
+    <ClInclude Include="Core\Math\Vector3f.hpp" />
+    <ClInclude Include="Core\Math\Vector3i.hpp" />
+    <ClInclude Include="Core\Math\Vector4i.hpp" />
     <ClInclude Include="Core\Systems\PlayerInputSystem.hpp" />
     <ClInclude Include="Core\Systems\RenderRectSystem.hpp" />
     <ClInclude Include="Core\Window.hpp" />

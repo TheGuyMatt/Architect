@@ -35,10 +35,10 @@ Game::Game(const std::string &title, int width, int height)
 
 void Game::registerComponents()
 {
-	_coordinator.RegisterComponent<PositionComponent>();
-	_coordinator.RegisterComponent<SizeComponent>();
-	_coordinator.RegisterComponent<ColorComponent>();
-	_coordinator.RegisterComponent<PlayerComponent>();
+	_coordinator.RegisterComponent<Transform>();
+	_coordinator.RegisterComponent<RigidBody>();
+	_coordinator.RegisterComponent<Renderable>();
+	_coordinator.RegisterComponent<Player>();
 }
 
 void Game::registerSystems()
@@ -47,9 +47,9 @@ void Game::registerSystems()
 	{
 		Signature signature;
 
-		signature.set(_coordinator.GetComponentType<PositionComponent>());
-		signature.set(_coordinator.GetComponentType<SizeComponent>());
-		signature.set(_coordinator.GetComponentType<ColorComponent>());
+		signature.set(_coordinator.GetComponentType<Transform>());
+		signature.set(_coordinator.GetComponentType<RigidBody>());
+		signature.set(_coordinator.GetComponentType<Renderable>());
 
 		_coordinator.SetSystemSignature<RenderRectSystem>(signature);
 	}
@@ -59,8 +59,8 @@ void Game::registerSystems()
 	{
 		Signature signature;
 
-		signature.set(_coordinator.GetComponentType<PositionComponent>());
-		signature.set(_coordinator.GetComponentType<PlayerComponent>());
+		signature.set(_coordinator.GetComponentType<Transform>());
+		signature.set(_coordinator.GetComponentType<Player>());
 
 		_coordinator.SetSystemSignature<PlayerInputSystem>(signature);
 	}
@@ -72,10 +72,10 @@ void Game::Run()
 	//create an entity and add components to it
 
 	Entity entity = _coordinator.CreateEntity();
-	_coordinator.AddComponent<PositionComponent>(entity, { int(100), int(100)});
-	_coordinator.AddComponent<SizeComponent>(entity, { int(120), int(120) });
-	_coordinator.AddComponent<ColorComponent>(entity, { int(200), int(0), int(200), int(255) });
-	_coordinator.AddComponent<PlayerComponent>(entity, {});
+	_coordinator.AddComponent<Transform>(entity, { Math::Vector2f(400.0f, 300.0f) });
+	_coordinator.AddComponent<RigidBody>(entity, { Math::Vector2i(100, 100) });
+	_coordinator.AddComponent<Renderable>(entity, { Math::Vector4i(200, 0, 200, 255) });
+	_coordinator.AddComponent<Player>(entity, {});
 
 	//game loop
 	using clock = std::chrono::high_resolution_clock;
@@ -102,7 +102,7 @@ void Game::Run()
 
 		float interpolation = static_cast<float>(lag / timestep);
 
-		//render with interpolation
+		//render
 		_window.clear(0, 0, 0, 255);
 
 		renderRectsystem->Update(interpolation);

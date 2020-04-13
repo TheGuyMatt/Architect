@@ -1,28 +1,28 @@
-#ifndef VECTOR3_HPP
-#define VECTOR3_HPP
+#ifndef VECTOR3I_HPP
+#define VECTOR3I_HPP
 
 namespace Math
 {
-	class Vector3
+	class Vector3i
 	{
 	public:
-		Vector3()
-			: x(0.0f), y(0.0f), z(0.0f)
+		Vector3i()
+			: x(0), y(0), z(0)
 		{}
 
-		Vector3(float x, float y, float z)
+		Vector3i(int x, int y, int z)
 			: x(x), y(y), z(z)
 		{}
 
-		Vector3 operator+(Vector3 const& rhs) const
+		Vector3i operator+(Vector3i const& rhs) const
 		{
-			return Vector3(
+			return Vector3i(
 				x + rhs.x,
 				y + rhs.y,
 				z + rhs.z);
 		}
 
-		Vector3 operator+=(Vector3 const& rhs)
+		Vector3i operator+=(Vector3i const& rhs)
 		{
 			x += rhs.x;
 			y += rhs.y;
@@ -31,15 +31,15 @@ namespace Math
 			return *this;
 		}
 
-		Vector3 operator-(Vector3 const& rhs) const
+		Vector3i operator-(Vector3i const& rhs) const
 		{
-			return Vector3(
+			return Vector3i(
 				x - rhs.x,
 				y - rhs.y,
 				z - rhs.z);
 		}
 
-		Vector3 operator-=(Vector3 const& rhs)
+		Vector3i operator-=(Vector3i const& rhs)
 		{
 			x -= rhs.x;
 			y -= rhs.y;
@@ -48,15 +48,15 @@ namespace Math
 			return *this;
 		}
 
-		Vector3 operator*(Vector3 const& rhs) const
+		Vector3i operator*(Vector3i const& rhs) const
 		{
-			return Vector3(
+			return Vector3i(
 				x * rhs.x,
 				y * rhs.y,
 				z * rhs.z);
 		}
 
-		Vector3 operator*=(Vector3 const& rhs)
+		Vector3i operator*=(Vector3i const& rhs)
 		{
 			x *= rhs.x;
 			y *= rhs.y;
@@ -65,15 +65,15 @@ namespace Math
 			return *this;
 		}
 
-		Vector3 operator*(float rhs) const
+		Vector3i operator*(int rhs) const
 		{
-			return Vector3(
+			return Vector3i(
 				x * rhs,
 				y * rhs,
 				z * rhs);
 		}
 
-		Vector3 operator*=(float rhs)
+		Vector3i operator*=(int rhs)
 		{
 			x *= rhs;
 			y *= rhs;
@@ -83,7 +83,7 @@ namespace Math
 		}
 
 
-		float x, y, z;
+		int x, y, z;
 	};
 }
 

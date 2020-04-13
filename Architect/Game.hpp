@@ -13,16 +13,19 @@
 #include "Core/Systems/RenderRectSystem.hpp"
 #include "Core/Systems/PlayerInputSystem.hpp"
 //Components
-#include "Core/Components/PositionComponent.hpp"
-#include "Core/Components/SizeComponent.hpp"
-#include "Core/Components/ColorComponent.hpp"
-#include "Core/Components/PlayerComponent.hpp"
+#include "Core/Components/Transform.hpp"
+#include "Core/Components/RidgidBody.hpp"
+#include "Core/Components/Renderable.hpp"
+#include "Core/Components/Player.hpp"
 
 //Events
 #include "Core/Events/EventDependencies.hpp"
 
 //Input
 #include "Core/Input/InputManager.hpp"
+
+//Math 
+#include "Core/Math/Math.hpp"
 
 //typedef std::shared_ptr<Window> WindowRef;
 //WindowRef _window = std::make_shared<Window>();

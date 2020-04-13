@@ -1,8 +1,8 @@
 #include "RenderRectSystem.hpp"
 
-#include "../Components/PositionComponent.hpp"
-#include "../Components/SizeComponent.hpp"
-#include "../Components/ColorComponent.hpp"
+#include "../Components/Transform.hpp"
+#include "../Components/RidgidBody.hpp"
+#include "../Components/Renderable.hpp"
 
 void RenderRectSystem::Init(Coordinator *coordinator, SDL_Renderer *renderer)
 {
@@ -14,16 +14,20 @@ void RenderRectSystem::Update(float interpolation)
 {
 	for (auto const& entity : mEntities)
 	{
-		auto& posComp = _coordinator->GetComponent<PositionComponent>(entity);
-		auto& sizeComp = _coordinator->GetComponent<SizeComponent>(entity);
-		auto& colorComp = _coordinator->GetComponent<ColorComponent>(entity);
+		auto& transform = _coordinator->GetComponent<Transform>(entity);
+		auto& ridgidBody = _coordinator->GetComponent<RigidBody>(entity);
+		auto& renderable = _coordinator->GetComponent<Renderable>(entity);
 
-		SDL_Rect rect;
-		rect.x = posComp.x;
-		rect.y = posComp.y;
-		rect.w = sizeComp.width;
-		rect.h = sizeComp.height;
-		SDL_SetRenderDrawColor(_renderer, colorComp.red, colorComp.green, colorComp.blue, colorComp.alpha);
-		SDL_RenderFillRect(_renderer, &rect);
+		_rect.x = static_cast<int>(transform.position.x);
+		_rect.y = static_cast<int>(transform.position.y);
+		_rect.w = ridgidBody.size.x;
+		_rect.h = ridgidBody.size.y;
+		this->SetDrawColor(renderable.color);
+		SDL_RenderFillRect(_renderer, &_rect);
 	}
+}
+
+void RenderRectSystem::SetDrawColor(Math::Vector4i color)
+{
+	SDL_SetRenderDrawColor(_renderer, color.x, color.y, color.z, color.w);
 }
