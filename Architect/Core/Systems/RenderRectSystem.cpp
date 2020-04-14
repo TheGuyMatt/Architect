@@ -18,8 +18,12 @@ void RenderRectSystem::Update(float interpolation)
 		auto& ridgidBody = _coordinator->GetComponent<RigidBody>(entity);
 		auto& renderable = _coordinator->GetComponent<Renderable>(entity);
 
-		_rect.x = static_cast<int>(transform.position.x);
-		_rect.y = static_cast<int>(transform.position.y);
+		Math::Vector2f currPos = transform.position;
+		Math::Vector2f prevPos = transform.previous_pos;
+		Math::Vector2f renderPos((currPos.x * interpolation) + (prevPos.x * (1.0f - interpolation)), (currPos.y * interpolation) + (prevPos.y * (1.0f - interpolation)));
+
+		_rect.x = (int)renderPos.x;
+		_rect.y = (int)renderPos.y;
 		_rect.w = ridgidBody.size.x;
 		_rect.h = ridgidBody.size.y;
 		this->SetDrawColor(renderable.color);

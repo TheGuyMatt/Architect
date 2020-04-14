@@ -6,6 +6,7 @@
 struct Transform
 {
 	Math::Vector2f position;
+	Math::Vector2f previous_pos;
 };
 
 #endif

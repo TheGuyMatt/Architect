@@ -15,14 +15,16 @@ void PlayerInputSystem::Init(Coordinator *coordinator)
 	}
 }
 
-void PlayerInputSystem::Update(float dt)
+void PlayerInputSystem::Update()
 {
 	for (auto const& entity : mEntities)
 	{
 		//auto& playerComp = _coordinator->GetComponent<Player>(entity);
 		auto& transform = _coordinator->GetComponent<Transform>(entity);
 
-		float speed = 10;
+		transform.previous_pos = transform.position;
+
+		float speed = 30;
 		if (_buttons.test(static_cast<std::size_t>(InputButtons::A))) transform.position.x -= speed;
 		else if (_buttons.test(static_cast<std::size_t>(InputButtons::D))) transform.position.x += speed;
 

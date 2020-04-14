@@ -10,7 +10,7 @@ class PlayerInputSystem : public System
 {
 public:
 	void Init(Coordinator *coordinator);
-	void Update(float dt);
+	void Update();
 
 private:
 	Coordinator *_coordinator = nullptr;

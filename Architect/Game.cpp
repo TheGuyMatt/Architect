@@ -1,9 +1,5 @@
 #include "Game.hpp"
-
-using namespace std::chrono_literals;
-//fixed time step of 1 / (60 fps)
-constexpr std::chrono::nanoseconds timestep(16ms);
-const float dt = 1.0f / 60.0f;
+#include <Windows.h>
 
 //keeps game loop running
 static bool running = true;
@@ -69,41 +65,41 @@ void Game::registerSystems()
 
 void Game::Run()
 {
-	//create an entity and add components to it
-
+	//create entities
 	Entity entity = _coordinator.CreateEntity();
-	_coordinator.AddComponent<Transform>(entity, { Math::Vector2f(400.0f, 300.0f) });
+	_coordinator.AddComponent<Transform>(entity, { Math::Vector2f(350.0f, 250.0f), Math::Vector2f(350.0f, 250.0f) });
 	_coordinator.AddComponent<RigidBody>(entity, { Math::Vector2i(100, 100) });
 	_coordinator.AddComponent<Renderable>(entity, { Math::Vector4i(200, 0, 200, 255) });
 	_coordinator.AddComponent<Player>(entity, {});
 
 	//game loop
-	using clock = std::chrono::high_resolution_clock;
-	std::chrono::nanoseconds lag(0ms);
-	auto previousTime = clock::now();
+	const int TICKS_PER_SECOND = 30;
+	const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+	const int MAX_FRAMESKIP = 5;
+
+	DWORD next_game_tick = GetTickCount();
+	int loops;
+	float interpolation;
 
 	while (running)
 	{
-		auto currentTime = clock::now();
-		auto elapsedTime = currentTime - previousTime;
-		previousTime = currentTime;
-		lag += std::chrono::duration_cast<std::chrono::nanoseconds>(elapsedTime);
+		loops = 0;
 
-		//input/events
-		_inputManager.Update();
-
-		while (lag >= timestep)
+		while (GetTickCount() > next_game_tick && loops < MAX_FRAMESKIP)
 		{
+			//input/events
+			_inputManager.Update();
 			//logic updates
-			playerInputSystem->Update(dt);
+			playerInputSystem->Update();
 
-			lag -= timestep;
+			next_game_tick += SKIP_TICKS;
+			loops++;
 		}
 
-		float interpolation = static_cast<float>(lag / timestep);
+		interpolation = float(GetTickCount() + SKIP_TICKS - next_game_tick) / float(SKIP_TICKS);
 
 		//render
-		_window.clear(0, 0, 0, 255);
+		_window.clear(0, 0, 200, 255);
 
 		renderRectsystem->Update(interpolation);
 
