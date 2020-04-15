@@ -75,22 +75,13 @@
     <ClInclude Include="Core\Components\RidgidBody.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Math\Vector2i.hpp">
+    <ClInclude Include="Core\Math\Vector2.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Math\Vector2f.hpp">
+    <ClInclude Include="Core\Math\Vector3.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Math\Vector3f.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Math\Vector3i.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Math\Vector4i.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Math\Math.hpp">
+    <ClInclude Include="Core\Math\Vector4.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

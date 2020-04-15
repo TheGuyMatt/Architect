@@ -1,7 +1,7 @@
 #ifndef RIGIDBODY_HPP
 #define RIGIDBODY_HPP
 
-#include "../Math/Vector2i.hpp"
+#include "../Math/Vector2.hpp"
 
 struct RigidBody
 {

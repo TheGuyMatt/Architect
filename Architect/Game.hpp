@@ -25,7 +25,9 @@
 #include "Core/Input/InputManager.hpp"
 
 //Math 
-#include "Core/Math/Math.hpp"
+#include "Core/Math/Vector2.hpp"
+#include "Core/Math/Vector3.hpp"
+#include "Core/Math/Vector4.hpp"
 
 //typedef std::shared_ptr<Window> WindowRef;
 //WindowRef _window = std::make_shared<Window>();
