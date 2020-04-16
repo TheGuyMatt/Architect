@@ -10,13 +10,16 @@
 //ECS
 #include "Core/Coordinator.hpp"
 //Systems
-#include "Core/Systems/RenderRectSystem.hpp"
+#include "Core/Systems/StaticRenderSystem.hpp"
 #include "Core/Systems/PlayerInputSystem.hpp"
+#include "Core/Systems/PlayerRenderSystem.hpp"
 //Components
 #include "Core/Components/Transform.hpp"
 #include "Core/Components/RidgidBody.hpp"
 #include "Core/Components/Renderable.hpp"
 #include "Core/Components/Player.hpp"
+#include "Core/Components/PhysicsBody.hpp"
+#include "Core/Components/StaticComp.hpp"
 
 //Events
 #include "Core/Events/EventDependencies.hpp"
@@ -44,8 +47,9 @@ private:
 
 	//systems
 	//std::shared_ptr<SYSTEM> system;
-	std::shared_ptr<RenderRectSystem> renderRectsystem;
+	std::shared_ptr<StaticRenderSystem> staticRenderSystem;
 	std::shared_ptr<PlayerInputSystem> playerInputSystem;
+	std::shared_ptr<PlayerRenderSystem> playerRenderSystem;
 
 	void registerComponents();
 	void registerSystems();

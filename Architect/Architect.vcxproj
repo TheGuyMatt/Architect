@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Components\PhysicsBody.hpp" />
     <ClInclude Include="Core\Components\Player.hpp" />
     <ClInclude Include="Core\Components\Renderable.hpp" />
     <ClInclude Include="Core\Components\RidgidBody.hpp" />
+    <ClInclude Include="Core\Components\StaticComp.hpp" />
     <ClInclude Include="Core\Components\Transform.hpp" />
     <ClInclude Include="Core\ECS\ComponentArray.hpp" />
     <ClInclude Include="Core\ECS\ComponentManager.hpp" />
@@ -38,7 +40,8 @@
     <ClInclude Include="Core\Math\Vector3.hpp" />
     <ClInclude Include="Core\Math\Vector4.hpp" />
     <ClInclude Include="Core\Systems\PlayerInputSystem.hpp" />
-    <ClInclude Include="Core\Systems\RenderRectSystem.hpp" />
+    <ClInclude Include="Core\Systems\PlayerRenderSystem.hpp" />
+    <ClInclude Include="Core\Systems\StaticRenderSystem.hpp" />
     <ClInclude Include="Core\Window.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Core\ECS\Types.hpp" />
@@ -46,7 +49,8 @@
   <ItemGroup>
     <ClCompile Include="Core\Input\InputManager.cpp" />
     <ClCompile Include="Core\Systems\PlayerInputSystem.cpp" />
-    <ClCompile Include="Core\Systems\RenderRectSystem.cpp" />
+    <ClCompile Include="Core\Systems\PlayerRenderSystem.cpp" />
+    <ClCompile Include="Core\Systems\StaticRenderSystem.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />

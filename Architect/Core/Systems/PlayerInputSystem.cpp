@@ -1,7 +1,7 @@
 #include "PlayerInputSystem.hpp"
 
-#include "../Components/Transform.hpp"
 #include "../Components/Player.hpp"
+#include "../Components/PhysicsBody.hpp"
 
 #include "../Input/InputButtons.hpp"
 
@@ -20,16 +20,17 @@ void PlayerInputSystem::Update()
 	for (auto const& entity : mEntities)
 	{
 		//auto& playerComp = _coordinator->GetComponent<Player>(entity);
-		auto& transform = _coordinator->GetComponent<Transform>(entity);
+		auto& physicsBody = _coordinator->GetComponent<PhysicsBody>(entity);
 
-		transform.previous_pos = transform.position;
+		float speed = 10;
 
-		float speed = 30;
-		if (_buttons.test(static_cast<std::size_t>(InputButtons::A))) transform.position.x -= speed;
-		else if (_buttons.test(static_cast<std::size_t>(InputButtons::D))) transform.position.x += speed;
+		if (_buttons.test(static_cast<std::size_t>(InputButtons::A))) physicsBody.velocity.x = speed;
+		else if (_buttons.test(static_cast<std::size_t>(InputButtons::D))) physicsBody.velocity.x = -speed;
+		else physicsBody.velocity.x = 0.0f;
 
-		if (_buttons.test(static_cast<std::size_t>(InputButtons::W))) transform.position.y -= speed;
-		else if (_buttons.test(static_cast<std::size_t>(InputButtons::S))) transform.position.y += speed;
+		if (_buttons.test(static_cast<std::size_t>(InputButtons::W))) physicsBody.velocity.y = speed;
+		else if (_buttons.test(static_cast<std::size_t>(InputButtons::S))) physicsBody.velocity.y = -speed;
+		else physicsBody.velocity.x = 0.0f;
 	}
 }
 
