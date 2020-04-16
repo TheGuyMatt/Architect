@@ -66,11 +66,22 @@ void Game::registerSystems()
 void Game::Run()
 {
 	//create entities
-	Entity entity = _coordinator.CreateEntity();
-	_coordinator.AddComponent<Transform>(entity, { Math::Vector2f(350.0f, 250.0f), Math::Vector2f(350.0f, 250.0f) });
-	_coordinator.AddComponent<RigidBody>(entity, { Math::Vector2i(100, 100) });
-	_coordinator.AddComponent<Renderable>(entity, { Math::Vector4i(200, 0, 200, 255) });
-	_coordinator.AddComponent<Player>(entity, {});
+	Entity player = _coordinator.CreateEntity();
+	_coordinator.AddComponent<Transform>(player, { Math::Vector2f(350.0f, 250.0f), Math::Vector2f(350.0f, 250.0f) });
+	_coordinator.AddComponent<RigidBody>(player, { Math::Vector2i(100, 100) });
+	_coordinator.AddComponent<Renderable>(player, { Math::Vector4i(200, 0, 200, 255) });
+	_coordinator.AddComponent<Player>(player, {});
+
+	for (float i = 0; i < 2; i++)
+	{
+		for (float j = 0; j < 2; j++)
+		{
+			Entity entity = _coordinator.CreateEntity();
+			_coordinator.AddComponent<Transform>(entity, { Math::Vector2f(i * 700, j * 500), Math::Vector2f(i * 700, j * 500) });
+			_coordinator.AddComponent<RigidBody>(entity, { Math::Vector2i(100, 100) });
+			_coordinator.AddComponent<Renderable>(entity, { Math::Vector4i(0, 255, 0, 255) });
+		}
+	}
 
 	//game loop
 	const int TICKS_PER_SECOND = 30;

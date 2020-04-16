@@ -18,16 +18,17 @@ void RenderRectSystem::Update(float interpolation)
 		auto& ridgidBody = _coordinator->GetComponent<RigidBody>(entity);
 		auto& renderable = _coordinator->GetComponent<Renderable>(entity);
 
-		Math::Vector2f currPos = transform.position;
-		Math::Vector2f prevPos = transform.previous_pos;
-		Math::Vector2f renderPos((currPos.x * interpolation) + (prevPos.x * (1.0f - interpolation)), (currPos.y * interpolation) + (prevPos.y * (1.0f - interpolation)));
+		_currPos = transform.position;
+		_prevPos = transform.previous_pos;
+		_worldPos = Math::Vector2f((_currPos.x * interpolation) + (_prevPos.x * (1.0f - interpolation)), (_currPos.y * interpolation) + (_prevPos.y * (1.0f - interpolation)));
+		_renderPos = _worldPos - _camera;
 
-		_rect.x = (int)renderPos.x;
-		_rect.y = (int)renderPos.y;
+		_rect.x = (int)_renderPos.x;
+		_rect.y = (int)_renderPos.y;
 		_rect.w = ridgidBody.size.x;
 		_rect.h = ridgidBody.size.y;
 		this->SetDrawColor(renderable.color);
-		SDL_RenderFillRect(_renderer, &_rect);
+		SDL_RenderDrawRect(_renderer, &_rect);
 	}
 }
 

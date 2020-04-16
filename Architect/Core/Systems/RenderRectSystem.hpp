@@ -20,6 +20,10 @@ private:
 	SDL_Renderer *_renderer;
 	SDL_Rect _rect;
 
+	Math::Vector2f _currPos, _prevPos, _worldPos;
+	Math::Vector2f _renderPos = Math::Vector2f(0, 0);
+	Math::Vector2f _camera = Math::Vector2f(50, 50);
+
 	void SetDrawColor(Math::Vector4i color);
 };
 
