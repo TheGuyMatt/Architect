@@ -24,13 +24,13 @@ void PlayerInputSystem::Update()
 
 		float speed = 10;
 
-		if (_buttons.test(static_cast<std::size_t>(InputButtons::A))) physicsBody.velocity.x = speed;
-		else if (_buttons.test(static_cast<std::size_t>(InputButtons::D))) physicsBody.velocity.x = -speed;
+		if (_buttons.test(static_cast<std::size_t>(InputButtons::A))) physicsBody.velocity.x = -speed;
+		else if (_buttons.test(static_cast<std::size_t>(InputButtons::D))) physicsBody.velocity.x = speed;
 		else physicsBody.velocity.x = 0.0f;
 
-		if (_buttons.test(static_cast<std::size_t>(InputButtons::W))) physicsBody.velocity.y = speed;
-		else if (_buttons.test(static_cast<std::size_t>(InputButtons::S))) physicsBody.velocity.y = -speed;
-		else physicsBody.velocity.x = 0.0f;
+		if (_buttons.test(static_cast<std::size_t>(InputButtons::W))) physicsBody.velocity.y = -speed;
+		else if (_buttons.test(static_cast<std::size_t>(InputButtons::S))) physicsBody.velocity.y = speed;
+		else physicsBody.velocity.y = 0.0f;
 	}
 }
 

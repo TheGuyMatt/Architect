@@ -13,6 +13,7 @@
 #include "Core/Systems/StaticRenderSystem.hpp"
 #include "Core/Systems/PlayerInputSystem.hpp"
 #include "Core/Systems/PlayerRenderSystem.hpp"
+#include "Core/Systems/PlayerMoveSystem.hpp"
 //Components
 #include "Core/Components/Transform.hpp"
 #include "Core/Components/RidgidBody.hpp"
@@ -50,6 +51,7 @@ private:
 	std::shared_ptr<StaticRenderSystem> staticRenderSystem;
 	std::shared_ptr<PlayerInputSystem> playerInputSystem;
 	std::shared_ptr<PlayerRenderSystem> playerRenderSystem;
+	std::shared_ptr<PlayerMoveSystem> playerMoveSystem;
 
 	void registerComponents();
 	void registerSystems();

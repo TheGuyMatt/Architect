@@ -1,8 +1,6 @@
 #include "Game.hpp"
 
-#include <chrono>
-using namespace std::chrono_literals;
-constexpr std::chrono::nanoseconds timestep(16ms);
+#include "Core/Time/Timing.hpp"
 
 //keeps game loop running
 static bool running = true;
@@ -81,6 +79,18 @@ void Game::registerSystems()
 		_coordinator.SetSystemSignature<PlayerRenderSystem>(signature);
 	}
 	playerRenderSystem->Init(&_coordinator, _window.getRenderer());
+
+	playerMoveSystem = _coordinator.RegisterSystem<PlayerMoveSystem>();
+	{
+		Signature signature;
+
+		signature.set(_coordinator.GetComponentType<Transform>());
+		signature.set(_coordinator.GetComponentType<PhysicsBody>());
+		signature.set(_coordinator.GetComponentType<Player>());
+
+		_coordinator.SetSystemSignature<PlayerMoveSystem>(signature);
+	}
+	playerMoveSystem->Init(&_coordinator);
 }
 
 void Game::Run()
@@ -106,41 +116,59 @@ void Game::Run()
 	_coordinator.AddComponent<Player>(player, {});
 
 	//game loop
-	using clock = std::chrono::high_resolution_clock;
-	std::chrono::nanoseconds lag(0ns);
-	auto prevTime = clock::now();
-	auto currentTime = clock::now();
-	auto elapsedTime = currentTime - prevTime;
-	float interpolation = 0.0f;
+	int fps = 0;
+	double lastTime = Time::getTime();
+	double fpsTimeCounter = 0.0;
+	double updateTimer = 1.0;
+	float frameTime = 1.0f / 60.0f;
 
 	while (running)
 	{
-		currentTime = clock::now();
-		elapsedTime = currentTime - prevTime;
-		prevTime = currentTime;
-		lag += std::chrono::duration_cast<std::chrono::nanoseconds>(elapsedTime);
+		double currentTime = Time::getTime();
+		double passedTime = currentTime - lastTime;
+		lastTime = currentTime;
 
-		//input/events
-		_inputManager.Update();
+		fpsTimeCounter += passedTime;
+		updateTimer += passedTime;
 
-		while (lag >= timestep)
+		if (fpsTimeCounter >= 1.0)
 		{
-			lag -= timestep;
-
-			//logic updates
-			playerInputSystem->Update();
+			double msPerFrame = 1000.0 / (double)fps;
+			std::cout << "FPS: " + fps << "\n";
+			fpsTimeCounter = 0;
+			fps = 0;
 		}
 
-		interpolation = std::chrono::duration<float, std::chrono::milliseconds::period>(lag / timestep).count();
-		std::cout << interpolation << "\n";
+		bool shouldRender = false;
+		while (updateTimer >= frameTime)
+		{
+			//input/events
+			_inputManager.Update();
+			playerInputSystem->Update();
 
-		//render
-		_window.clear(0, 0, 200, 255);
+			//logic updates
+			playerMoveSystem->Update();
 
-		staticRenderSystem->Update(interpolation);
-		playerRenderSystem->Update(interpolation);
+			updateTimer -= frameTime;
+			shouldRender = true;
+		}
 
-		_window.present();
+		if (shouldRender)
+		{
+			//render
+			_window.clear(0, 0, 200, 255);
+
+			staticRenderSystem->Update();
+			playerRenderSystem->Update();
+
+			_window.present();
+
+			fps++;
+		}
+		else
+		{
+			Time::sleep(1);
+		}
 	}
 
 	_window.close();

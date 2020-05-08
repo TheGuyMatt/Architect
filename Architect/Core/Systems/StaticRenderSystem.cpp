@@ -10,7 +10,7 @@ void StaticRenderSystem::Init(Coordinator *coordinator, SDL_Renderer *renderer)
 	_renderer = renderer;
 }
 
-void StaticRenderSystem::Update(float interpolation)
+void StaticRenderSystem::Update()
 {
 	for (auto const& entity : mEntities)
 	{

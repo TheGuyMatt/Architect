@@ -13,7 +13,7 @@ class PlayerRenderSystem : public System
 {
 public:
 	void Init(Coordinator *coordinator, SDL_Renderer *renderer);
-	void Update(float interpolation);
+	void Update();
 
 private:
 	Coordinator * _coordinator;

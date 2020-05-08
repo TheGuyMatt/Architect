@@ -11,7 +11,7 @@ void PlayerRenderSystem::Init(Coordinator *coordinator, SDL_Renderer *renderer)
 	_renderer = renderer;
 }
 
-void PlayerRenderSystem::Update(float interpolation)
+void PlayerRenderSystem::Update()
 {
 	for (auto const& entity : mEntities)
 	{
@@ -19,9 +19,6 @@ void PlayerRenderSystem::Update(float interpolation)
 		auto& ridgidBody = _coordinator->GetComponent<RigidBody>(entity);
 		auto& renderable = _coordinator->GetComponent<Renderable>(entity);
 		auto& physicsBody = _coordinator->GetComponent<PhysicsBody>(entity);
-
-		Math::Vector2f inter = Math::Vector2f(interpolation, interpolation);
-		transform.position = transform.position + (physicsBody.velocity * inter);
 
 		_rect.x = (int)transform.position.x;
 		_rect.y = (int)transform.position.y;
