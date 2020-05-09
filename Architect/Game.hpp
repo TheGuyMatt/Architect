@@ -14,6 +14,7 @@
 #include "Core/Systems/PlayerInputSystem.hpp"
 #include "Core/Systems/PlayerRenderSystem.hpp"
 #include "Core/Systems/PlayerMoveSystem.hpp"
+#include "Core/Systems/CameraController.hpp"
 //Components
 #include "Core/Components/Transform.hpp"
 #include "Core/Components/RidgidBody.hpp"
@@ -33,6 +34,9 @@
 #include "Core/Math/Vector3.hpp"
 #include "Core/Math/Vector4.hpp"
 
+//Camera
+#include "Core/Camera.hpp"
+
 //typedef std::shared_ptr<Window> WindowRef;
 //WindowRef _window = std::make_shared<Window>();
 
@@ -45,6 +49,9 @@ private:
 	Window _window;
 	Coordinator _coordinator;
 	InputManager _inputManager;
+
+	std::shared_ptr<CameraController> cameraController;
+	Camera worldCamera;
 
 	//systems
 	//std::shared_ptr<SYSTEM> system;

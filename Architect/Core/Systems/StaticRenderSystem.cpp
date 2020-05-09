@@ -4,9 +4,10 @@
 #include "../Components/RidgidBody.hpp"
 #include "../Components/Renderable.hpp"
 
-void StaticRenderSystem::Init(Coordinator *coordinator, SDL_Renderer *renderer)
+void StaticRenderSystem::Init(Coordinator *coordinator, Camera* camera, SDL_Renderer *renderer)
 {
 	_coordinator = coordinator;
+	_worldCamera = camera;
 	_renderer = renderer;
 }
 
@@ -18,8 +19,8 @@ void StaticRenderSystem::Update()
 		auto& ridgidBody = _coordinator->GetComponent<RigidBody>(entity);
 		auto& renderable = _coordinator->GetComponent<Renderable>(entity);
 
-		_rect.x = (int)transform.position.x;
-		_rect.y = (int)transform.position.y;
+		_rect.x = (int)(transform.position.x - _worldCamera->position.x);
+		_rect.y = (int)(transform.position.y - _worldCamera->position.y);
 		_rect.w = ridgidBody.size.x;
 		_rect.h = ridgidBody.size.y;
 		this->SetDrawColor(renderable.color);

@@ -5,9 +5,10 @@
 #include "../Components/Renderable.hpp"
 #include "../Components/PhysicsBody.hpp"
 
-void PlayerRenderSystem::Init(Coordinator *coordinator, SDL_Renderer *renderer)
+void PlayerRenderSystem::Init(Coordinator *coordinator, Camera* camera, SDL_Renderer *renderer)
 {
 	_coordinator = coordinator;
+	_worldCamera = camera;
 	_renderer = renderer;
 }
 
@@ -20,8 +21,8 @@ void PlayerRenderSystem::Update()
 		auto& renderable = _coordinator->GetComponent<Renderable>(entity);
 		auto& physicsBody = _coordinator->GetComponent<PhysicsBody>(entity);
 
-		_rect.x = (int)transform.position.x;
-		_rect.y = (int)transform.position.y;
+		_rect.x = (int)(transform.position.x - _worldCamera->position.x);
+		_rect.y = (int)(transform.position.y - _worldCamera->position.y);
 		_rect.w = ridgidBody.size.x;
 		_rect.h = ridgidBody.size.y;
 		this->SetDrawColor(renderable.color);

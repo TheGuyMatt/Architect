@@ -8,15 +8,17 @@
 #include "../Math/Vector2.hpp"
 #include "../Math/Vector3.hpp"
 #include "../Math/Vector4.hpp"
+#include "../Camera.hpp"
 
 class PlayerRenderSystem : public System
 {
 public:
-	void Init(Coordinator *coordinator, SDL_Renderer *renderer);
+	void Init(Coordinator *coordinator, Camera* camera, SDL_Renderer *renderer);
 	void Update();
 
 private:
 	Coordinator * _coordinator;
+	Camera* _worldCamera;
 	SDL_Renderer *_renderer;
 	SDL_Rect _rect;
 

@@ -40,6 +40,17 @@ void Game::registerComponents()
 
 void Game::registerSystems()
 {
+	cameraController = _coordinator.RegisterSystem<CameraController>();
+	{
+		Signature signature;
+
+		signature.set(_coordinator.GetComponentType<Player>());
+		signature.set(_coordinator.GetComponentType<Transform>());
+
+		_coordinator.SetSystemSignature<CameraController>(signature);
+	}
+	cameraController->Init(&_coordinator, &worldCamera);
+
 	staticRenderSystem = _coordinator.RegisterSystem<StaticRenderSystem>();
 	{
 		Signature signature;
@@ -51,7 +62,7 @@ void Game::registerSystems()
 
 		_coordinator.SetSystemSignature<StaticRenderSystem>(signature);
 	}
-	staticRenderSystem->Init(&_coordinator, _window.getRenderer());
+	staticRenderSystem->Init(&_coordinator, &worldCamera, _window.getRenderer());
 
 	playerInputSystem = _coordinator.RegisterSystem<PlayerInputSystem>();
 	{
@@ -76,7 +87,7 @@ void Game::registerSystems()
 
 		_coordinator.SetSystemSignature<PlayerRenderSystem>(signature);
 	}
-	playerRenderSystem->Init(&_coordinator, _window.getRenderer());
+	playerRenderSystem->Init(&_coordinator, &worldCamera, _window.getRenderer());
 
 	playerMoveSystem = _coordinator.RegisterSystem<PlayerMoveSystem>();
 	{
@@ -102,6 +113,9 @@ void Game::Update()
 {
 	//logic updates
 	playerMoveSystem->Update();
+
+	//update camera after logic
+	cameraController->Update();
 }
 
 void Game::Render()
