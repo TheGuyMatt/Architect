@@ -43,7 +43,6 @@
     <ClInclude Include="Core\Systems\PlayerMoveSystem.hpp" />
     <ClInclude Include="Core\Systems\PlayerRenderSystem.hpp" />
     <ClInclude Include="Core\Systems\StaticRenderSystem.hpp" />
-    <ClInclude Include="Core\Time\Timing.hpp" />
     <ClInclude Include="Core\Window.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Core\ECS\Types.hpp" />
@@ -54,7 +53,6 @@
     <ClCompile Include="Core\Systems\PlayerMoveSystem.cpp" />
     <ClCompile Include="Core\Systems\PlayerRenderSystem.cpp" />
     <ClCompile Include="Core\Systems\StaticRenderSystem.cpp" />
-    <ClCompile Include="Core\Time\Timing.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />

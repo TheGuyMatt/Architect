@@ -56,6 +56,10 @@ private:
 	void registerComponents();
 	void registerSystems();
 
+	void HandleInput();
+	void Update();
+	void Render();
+
 	void Run();
 };
 

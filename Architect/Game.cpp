@@ -1,7 +1,5 @@
 #include "Game.hpp"
 
-#include "Core/Time/Timing.hpp"
-
 //keeps game loop running
 static bool running = true;
 //handler for quit event
@@ -93,6 +91,30 @@ void Game::registerSystems()
 	playerMoveSystem->Init(&_coordinator);
 }
 
+void Game::HandleInput()
+{
+	//input updates
+	_inputManager.Update();
+	playerInputSystem->Update();
+}
+
+void Game::Update()
+{
+	//logic updates
+	playerMoveSystem->Update();
+}
+
+void Game::Render()
+{
+	//render updates
+	_window.clear(0, 0, 200, 255);
+
+	staticRenderSystem->Update();
+	playerRenderSystem->Update();
+
+	_window.present();
+}
+
 void Game::Run()
 {
 	//create entities
@@ -108,6 +130,7 @@ void Game::Run()
 		}
 	}
 
+	//create player
 	Entity player = _coordinator.CreateEntity();
 	_coordinator.AddComponent<Transform>(player, { Math::Vector2f(350.0f, 250.0f) });
 	_coordinator.AddComponent<RigidBody>(player, { Math::Vector2i(100, 100) });
@@ -115,61 +138,26 @@ void Game::Run()
 	_coordinator.AddComponent<Renderable>(player, { Math::Vector4i(200, 0, 200, 255) });
 	_coordinator.AddComponent<Player>(player, {});
 
-	//game loop
-	int fps = 0;
-	double lastTime = Time::getTime();
-	double fpsTimeCounter = 0.0;
-	double updateTimer = 1.0;
-	float frameTime = 1.0f / 60.0f;
+	const float FPS = 60;
+	const float frameDelay = 1000 / FPS;
+	float frameStart;
+	float frameTime;
 
 	while (running)
 	{
-		double currentTime = Time::getTime();
-		double passedTime = currentTime - lastTime;
-		lastTime = currentTime;
+		frameStart = (float)SDL_GetTicks();
 
-		fpsTimeCounter += passedTime;
-		updateTimer += passedTime;
+		this->HandleInput();
+		this->Update();
+		this->Render();
 
-		if (fpsTimeCounter >= 1.0)
+		frameTime = SDL_GetTicks() - frameStart;
+
+		if (frameDelay > frameTime)
 		{
-			double msPerFrame = 1000.0 / (double)fps;
-			std::cout << "FPS: " + fps << "\n";
-			fpsTimeCounter = 0;
-			fps = 0;
-		}
-
-		bool shouldRender = false;
-		while (updateTimer >= frameTime)
-		{
-			//input/events
-			_inputManager.Update();
-			playerInputSystem->Update();
-
-			//logic updates
-			playerMoveSystem->Update();
-
-			updateTimer -= frameTime;
-			shouldRender = true;
-		}
-
-		if (shouldRender)
-		{
-			//render
-			_window.clear(0, 0, 200, 255);
-
-			staticRenderSystem->Update();
-			playerRenderSystem->Update();
-
-			_window.present();
-
-			fps++;
-		}
-		else
-		{
-			Time::sleep(1);
+			SDL_Delay((Uint32)(frameDelay - frameTime));
 		}
 	}
-
+	
 	_window.close();
 }
