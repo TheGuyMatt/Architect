@@ -44,6 +44,7 @@ class Game
 {
 public:
 	Game(const std::string &title, int width, int height);
+	~Game();
 
 private:
 	Window _window;
@@ -68,6 +69,9 @@ private:
 	void Render();
 
 	void Run();
+
+	//test texture things
+	SDL_Texture* testTexture = nullptr;
 };
 
 #endif

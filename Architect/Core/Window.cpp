@@ -6,6 +6,7 @@ Window::~Window()
 {
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);
+	IMG_Quit();
 	SDL_Quit();
 }
 
@@ -30,6 +31,12 @@ bool Window::Init()
 	{
 		std::cerr << "Failed to initialize SDL_VIDEO\n";
 		return false;
+	}
+
+	//test loading textures
+	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
+	{
+		std::cerr << "Failed to initalize SDL_image\n";
 	}
 
 	//create the window
