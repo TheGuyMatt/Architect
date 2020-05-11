@@ -47,6 +47,7 @@
     <ClInclude Include="Core\Systems\Player\PlayerMove.hpp" />
     <ClInclude Include="Core\Systems\Player\PlayerRender.hpp" />
     <ClInclude Include="Core\Systems\StaticRender.hpp" />
+    <ClInclude Include="Core\Util\StringHandler.hpp" />
     <ClInclude Include="Core\Window.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Core\ECS\Types.hpp" />
@@ -60,6 +61,7 @@
     <ClCompile Include="Core\Systems\Player\PlayerMove.cpp" />
     <ClCompile Include="Core\Systems\Player\PlayerRender.cpp" />
     <ClCompile Include="Core\Systems\StaticRender.cpp" />
+    <ClCompile Include="Core\Util\StringHandler.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />

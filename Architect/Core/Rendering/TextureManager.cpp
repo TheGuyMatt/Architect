@@ -1,6 +1,7 @@
 #include "TextureManager.hpp"
 
 #include <iostream>
+#include "../Util/StringHandler.hpp"
 
 std::map<std::string, Texture*> TextureManager::_textureList;
 
@@ -70,38 +71,19 @@ void TextureManager::addTexture(SDL_Renderer* renderer, std::string ID, std::str
 	_textureList[ID] = newTexture;
 }
 
-std::vector<std::string> TextureManager::explodeStr(std::string str, const std::string& separator)
-{
-	std::vector<std::string> results;
-
-	int found;
-	found = str.find_first_of(separator);
-	while (found != std::string::npos)
-	{
-		if (found > 0) results.push_back(str.substr(0, found));
-
-		str = str.substr(found + 1);
-		found = str.find_first_of(separator);
-	}
-
-	if (str.length() > 0) results.push_back(str);
-
-	return results;
-}
-
 std::string TextureManager::getFileNameWithoutExt(std::string filename)
 {
-	std::vector<std::string> parts = explodeStr(filename, "/");
+	std::vector<std::string> parts = StringHandler::explode(filename, "/");
 	std::string newFilename = parts[parts.size() - 1];
 
-	parts = explodeStr(newFilename, ".");
+	parts = StringHandler::explode(newFilename, ".");
 	newFilename = parts[0];
 	return newFilename;
 }
 
 std::string TextureManager::getFileNameExt(std::string filename)
 {
-	std::vector<std::string> parts = explodeStr(filename, ".");
+	std::vector<std::string> parts = StringHandler::explode(filename, ".");
 
 	return (parts.size() <= 1 ? "" : parts[parts.size() - 1]);
 }
