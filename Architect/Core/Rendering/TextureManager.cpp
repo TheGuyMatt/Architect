@@ -11,11 +11,11 @@ bool TextureManager::Init(SDL_Renderer* renderer)
 	if (renderer == nullptr) return false;
 
 	std::vector<std::string> files;
-	files.push_back("Resources/PineTree.png");
-	files.push_back("Resources/Scarecrow.png");
-	files.push_back("Resources/sky.png");
-	files.push_back("Resources/TempTileSet.png");
-	files.push_back("Resources/Zip.png");
+	files.push_back("Resources/Textures/PineTree.png");
+	files.push_back("Resources/Textures/Scarecrow.png");
+	files.push_back("Resources/Textures/sky.png");
+	files.push_back("Resources/Textures/TempTileSet.png");
+	files.push_back("Resources/Textures/Zip.png");
 
 	for (auto filename : files)
 	{
