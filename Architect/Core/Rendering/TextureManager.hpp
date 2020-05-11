@@ -18,10 +18,6 @@ public:
 private:
 	static std::map<std::string, Texture*> _textureList;
 	static void addTexture(SDL_Renderer* renderer, std::string ID, std::string filename);
-	
-	//file functions
-	static std::string getFileNameWithoutExt(std::string filename);
-	static std::string getFileNameExt(std::string filename);
 };
 
 #endif

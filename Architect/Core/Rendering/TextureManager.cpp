@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "../Util/StringHandler.hpp"
+#include "../Util/FileManager.hpp"
 
 std::map<std::string, Texture*> TextureManager::_textureList;
 
@@ -11,17 +12,12 @@ bool TextureManager::Init(SDL_Renderer* renderer)
 
 	if (renderer == nullptr) return false;
 
-	std::vector<std::string> files;
-	files.push_back("Resources/Textures/PineTree.png");
-	files.push_back("Resources/Textures/Scarecrow.png");
-	files.push_back("Resources/Textures/sky.png");
-	files.push_back("Resources/Textures/TempTileSet.png");
-	files.push_back("Resources/Textures/Zip.png");
+	std::vector<std::string> files = FileManager::getFilesInFolder("Resources/Textures");
 
 	for (auto filename : files)
 	{
-		std::string ext = getFileNameExt(filename);
-		std::string ID = getFileNameWithoutExt(filename);
+		std::string ext = FileManager::getFileNameExt(filename);
+		std::string ID = FileManager::getFileNameWithoutExt(filename);
 
 		if (ext != "png") continue;
 
@@ -69,21 +65,4 @@ void TextureManager::addTexture(SDL_Renderer* renderer, std::string ID, std::str
 	}
 
 	_textureList[ID] = newTexture;
-}
-
-std::string TextureManager::getFileNameWithoutExt(std::string filename)
-{
-	std::vector<std::string> parts = StringHandler::explode(filename, "/");
-	std::string newFilename = parts[parts.size() - 1];
-
-	parts = StringHandler::explode(newFilename, ".");
-	newFilename = parts[0];
-	return newFilename;
-}
-
-std::string TextureManager::getFileNameExt(std::string filename)
-{
-	std::vector<std::string> parts = StringHandler::explode(filename, ".");
-
-	return (parts.size() <= 1 ? "" : parts[parts.size() - 1]);
 }
