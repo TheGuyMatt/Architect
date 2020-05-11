@@ -37,6 +37,9 @@
 #include "Core/Systems/Camera/Camera.hpp"
 #include "Core/Systems/Camera/CameraController.hpp"
 
+//Rendering
+#include "Core/Rendering/Texture.hpp"
+
 //typedef std::shared_ptr<Window> WindowRef;
 //WindowRef _window = std::make_shared<Window>();
 
@@ -44,7 +47,6 @@ class Game
 {
 public:
 	Game(const std::string &title, int width, int height);
-	~Game();
 
 private:
 	Window _window;
@@ -71,7 +73,7 @@ private:
 	void Run();
 
 	//test texture things
-	SDL_Texture* testTexture = nullptr;
+	Texture testTexture;
 };
 
 #endif

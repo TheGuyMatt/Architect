@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Rendering\Texture.hpp" />
     <ClInclude Include="Core\Systems\Camera\Camera.hpp" />
     <ClInclude Include="Core\Components\PhysicsBody.hpp" />
     <ClInclude Include="Core\Components\Player.hpp" />
@@ -40,7 +41,6 @@
     <ClInclude Include="Core\Math\Vector2.hpp" />
     <ClInclude Include="Core\Math\Vector3.hpp" />
     <ClInclude Include="Core\Math\Vector4.hpp" />
-    <ClInclude Include="Core\Rendering\TextureManager.hpp" />
     <ClInclude Include="Core\Systems\Camera\CameraController.hpp" />
     <ClInclude Include="Core\Systems\Player\PlayerInput.hpp" />
     <ClInclude Include="Core\Systems\Player\PlayerMove.hpp" />
@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Input\InputManager.cpp" />
+    <ClCompile Include="Core\Rendering\Texture.cpp" />
     <ClCompile Include="Core\Systems\Camera\CameraController.cpp" />
     <ClCompile Include="Core\Systems\Player\PlayerInput.cpp" />
     <ClCompile Include="Core\Systems\Player\PlayerMove.cpp" />

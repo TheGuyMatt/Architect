@@ -28,11 +28,6 @@ Game::Game(const std::string &title, int width, int height)
 	this->Run();
 }
 
-Game::~Game()
-{
-	SDL_DestroyTexture(testTexture);
-}
-
 void Game::registerComponents()
 {
 	_coordinator.RegisterComponent<Transform>();
@@ -128,12 +123,7 @@ void Game::Render()
 	//render updates
 	_window.clear(0, 0, 200, 255);
 
-	SDL_Rect rect;
-	rect.x = 100 - (int)worldCamera.position.x;
-	rect.y = 100 - (int)worldCamera.position.y;
-	rect.w = 62 * 2;
-	rect.h = 104 * 2;
-	SDL_RenderCopy(_window.getRenderer(), testTexture, nullptr, &rect);
+	testTexture.render(200, 200, testTexture.getWidth() * 2, testTexture.getHeight() * 4);
 
 	staticRender->Update();
 	playerRender->Update();
@@ -165,11 +155,7 @@ void Game::Run()
 	_coordinator.AddComponent<Player>(player, {});
 
 	//test texture stuff
-	SDL_Surface* surface = IMG_Load("Resources/Scarecrow.png");
-	if (surface == nullptr) std::cerr << "Failed to create surface\n";
-	testTexture = SDL_CreateTextureFromSurface(_window.getRenderer(), surface);
-	if (testTexture == nullptr) std::cerr << "Failed to create texture\n";
-	SDL_FreeSurface(surface);
+	testTexture.load(_window.getRenderer(), "Resources/Scarecrow.png");
 
 	const float FPS = 60;
 	const float frameDelay = 1000 / FPS;
