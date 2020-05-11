@@ -123,7 +123,7 @@ void Game::Render()
 	//render updates
 	_window.clear(0, 0, 200, 255);
 
-	testTexture.render(200, 200, testTexture.getWidth() * 2, testTexture.getHeight() * 4);
+	testTexture.render(200, 200, testTexture.getWidth() * 2, testTexture.getHeight() * 2);
 
 	staticRender->Update();
 	playerRender->Update();
