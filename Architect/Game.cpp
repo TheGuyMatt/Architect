@@ -19,6 +19,9 @@ Game::Game(const std::string &title, int width, int height)
 	//initialize inputManager
 	_inputManager.Init(&_coordinator);
 
+	//initialize textureManager
+	_textureManager.Init(_window.getRenderer());
+
 	//register components with coordinator
 	this->registerComponents();
 
@@ -121,9 +124,9 @@ void Game::Update()
 void Game::Render()
 {
 	//render updates
-	_window.clear(0, 0, 200, 255);
+	_window.clear(0, 0, 0, 255);
 
-	testTexture.render(200, 200, testTexture.getWidth() * 2, testTexture.getHeight() * 2);
+	_textureManager.get("sky")->render(0, 0, 800, 600);
 
 	staticRender->Update();
 	playerRender->Update();
@@ -153,9 +156,6 @@ void Game::Run()
 	_coordinator.AddComponent<PhysicsBody>(player, { Math::Vector2f() });
 	_coordinator.AddComponent<Renderable>(player, { Math::Vector4i(200, 0, 200, 255) });
 	_coordinator.AddComponent<Player>(player, {});
-
-	//test texture stuff
-	testTexture.load(_window.getRenderer(), "Resources/Scarecrow.png");
 
 	const float FPS = 60;
 	const float frameDelay = 1000 / FPS;

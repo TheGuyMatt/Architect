@@ -38,7 +38,7 @@
 #include "Core/Systems/Camera/CameraController.hpp"
 
 //Rendering
-#include "Core/Rendering/Texture.hpp"
+#include "Core/Rendering/TextureManager.hpp"
 
 //typedef std::shared_ptr<Window> WindowRef;
 //WindowRef _window = std::make_shared<Window>();
@@ -73,7 +73,7 @@ private:
 	void Run();
 
 	//test texture things
-	Texture testTexture;
+	TextureManager _textureManager;
 };
 
 #endif
