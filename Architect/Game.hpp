@@ -10,11 +10,10 @@
 //ECS
 #include "Core/Coordinator.hpp"
 //Systems
-#include "Core/Systems/StaticRenderSystem.hpp"
-#include "Core/Systems/PlayerInputSystem.hpp"
-#include "Core/Systems/PlayerRenderSystem.hpp"
-#include "Core/Systems/PlayerMoveSystem.hpp"
-#include "Core/Systems/CameraController.hpp"
+#include "Core/Systems/StaticRender.hpp"
+#include "Core/Systems/Player/PlayerInput.hpp"
+#include "Core/Systems/Player/PlayerRender.hpp"
+#include "Core/Systems/Player/PlayerMove.hpp"
 //Components
 #include "Core/Components/Transform.hpp"
 #include "Core/Components/RidgidBody.hpp"
@@ -35,7 +34,8 @@
 #include "Core/Math/Vector4.hpp"
 
 //Camera
-#include "Core/Camera.hpp"
+#include "Core/Systems/Camera/Camera.hpp"
+#include "Core/Systems/Camera/CameraController.hpp"
 
 //typedef std::shared_ptr<Window> WindowRef;
 //WindowRef _window = std::make_shared<Window>();
@@ -56,10 +56,10 @@ private:
 
 	//systems
 	//std::shared_ptr<SYSTEM> system;
-	std::shared_ptr<StaticRenderSystem> staticRenderSystem;
-	std::shared_ptr<PlayerInputSystem> playerInputSystem;
-	std::shared_ptr<PlayerRenderSystem> playerRenderSystem;
-	std::shared_ptr<PlayerMoveSystem> playerMoveSystem;
+	std::shared_ptr<StaticRender> staticRender;
+	std::shared_ptr<PlayerInput> playerInput;
+	std::shared_ptr<PlayerRender> playerRender;
+	std::shared_ptr<PlayerMove> playerMove;
 
 	void registerComponents();
 	void registerSystems();

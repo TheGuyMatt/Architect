@@ -1,21 +1,21 @@
-#include "PlayerInputSystem.hpp"
+#include "PlayerInput.hpp"
 
-#include "../Components/Player.hpp"
-#include "../Components/PhysicsBody.hpp"
+#include "../../Components/Player.hpp"
+#include "../../Components/PhysicsBody.hpp"
 
-#include "../Input/InputButtons.hpp"
+#include "../../Input/InputButtons.hpp"
 
-void PlayerInputSystem::Init(Coordinator *coordinator)
+void PlayerInput::Init(Coordinator *coordinator)
 {
 	_coordinator = coordinator;
 
 	if (_coordinator != nullptr)
 	{
-		_coordinator->AddEventListener(METHOD_LISTENER(Events::Window::INPUT, PlayerInputSystem::InputListener));
+		_coordinator->AddEventListener(METHOD_LISTENER(Events::Window::INPUT, PlayerInput::InputListener));
 	}
 }
 
-void PlayerInputSystem::Update()
+void PlayerInput::Update()
 {
 	for (auto const& entity : mEntities)
 	{
@@ -34,7 +34,7 @@ void PlayerInputSystem::Update()
 	}
 }
 
-void PlayerInputSystem::InputListener(Event &event)
+void PlayerInput::InputListener(Event &event)
 {
 	_buttons = event.GetParam<std::bitset<8>>(Events::Window::Input::INPUT);
 }

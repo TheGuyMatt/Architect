@@ -1,8 +1,8 @@
 #include "CameraController.hpp"
 
 //also checks if entity has player component
-#include "../Components/Transform.hpp"
-#include "../Components/RidgidBody.hpp"
+#include "../../Components/Transform.hpp"
+#include "../../Components/RidgidBody.hpp"
 
 void CameraController::Init(Coordinator* coordinator, Camera* camera)
 {

@@ -33,7 +33,7 @@ bool Window::Init()
 		return false;
 	}
 
-	//test loading textures
+	//initialize SDL_image
 	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
 	{
 		std::cerr << "Failed to initalize SDL_image\n";

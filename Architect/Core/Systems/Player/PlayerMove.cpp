@@ -1,14 +1,14 @@
-#include "PlayerMoveSystem.hpp"
+#include "PlayerMove.hpp"
 
-#include "../Components/Transform.hpp"
-#include "../Components/PhysicsBody.hpp"
+#include "../../Components/Transform.hpp"
+#include "../../Components/PhysicsBody.hpp"
 
-void PlayerMoveSystem::Init(Coordinator* coordinator)
+void PlayerMove::Init(Coordinator* coordinator)
 {
 	_coordinator = coordinator;
 }
 
-void PlayerMoveSystem::Update()
+void PlayerMove::Update()
 {
 	for (auto const& entity : mEntities)
 	{

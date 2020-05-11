@@ -56,7 +56,7 @@ void Game::registerSystems()
 	}
 	cameraController->Init(&_coordinator, &worldCamera);
 
-	staticRenderSystem = _coordinator.RegisterSystem<StaticRenderSystem>();
+	staticRender = _coordinator.RegisterSystem<StaticRender>();
 	{
 		Signature signature;
 
@@ -65,22 +65,22 @@ void Game::registerSystems()
 		signature.set(_coordinator.GetComponentType<Renderable>());
 		signature.set(_coordinator.GetComponentType<StaticComp>());
 
-		_coordinator.SetSystemSignature<StaticRenderSystem>(signature);
+		_coordinator.SetSystemSignature<StaticRender>(signature);
 	}
-	staticRenderSystem->Init(&_coordinator, &worldCamera, _window.getRenderer());
+	staticRender->Init(&_coordinator, &worldCamera, _window.getRenderer());
 
-	playerInputSystem = _coordinator.RegisterSystem<PlayerInputSystem>();
+	playerInput = _coordinator.RegisterSystem<PlayerInput>();
 	{
 		Signature signature;
 
 		signature.set(_coordinator.GetComponentType<PhysicsBody>());
 		signature.set(_coordinator.GetComponentType<Player>());
 
-		_coordinator.SetSystemSignature<PlayerInputSystem>(signature);
+		_coordinator.SetSystemSignature<PlayerInput>(signature);
 	}
-	playerInputSystem->Init(&_coordinator);
+	playerInput->Init(&_coordinator);
 
-	playerRenderSystem = _coordinator.RegisterSystem<PlayerRenderSystem>();
+	playerRender = _coordinator.RegisterSystem<PlayerRender>();
 	{
 		Signature signature;
 
@@ -90,11 +90,11 @@ void Game::registerSystems()
 		signature.set(_coordinator.GetComponentType<Player>());
 		signature.set(_coordinator.GetComponentType<Renderable>());
 
-		_coordinator.SetSystemSignature<PlayerRenderSystem>(signature);
+		_coordinator.SetSystemSignature<PlayerRender>(signature);
 	}
-	playerRenderSystem->Init(&_coordinator, &worldCamera, _window.getRenderer());
+	playerRender->Init(&_coordinator, &worldCamera, _window.getRenderer());
 
-	playerMoveSystem = _coordinator.RegisterSystem<PlayerMoveSystem>();
+	playerMove = _coordinator.RegisterSystem<PlayerMove>();
 	{
 		Signature signature;
 
@@ -102,22 +102,22 @@ void Game::registerSystems()
 		signature.set(_coordinator.GetComponentType<PhysicsBody>());
 		signature.set(_coordinator.GetComponentType<Player>());
 
-		_coordinator.SetSystemSignature<PlayerMoveSystem>(signature);
+		_coordinator.SetSystemSignature<PlayerMove>(signature);
 	}
-	playerMoveSystem->Init(&_coordinator);
+	playerMove->Init(&_coordinator);
 }
 
 void Game::HandleInput()
 {
 	//input updates
 	_inputManager.Update();
-	playerInputSystem->Update();
+	playerInput->Update();
 }
 
 void Game::Update()
 {
 	//logic updates
-	playerMoveSystem->Update();
+	playerMove->Update();
 
 	//update camera after logic
 	cameraController->Update();
@@ -128,22 +128,22 @@ void Game::Render()
 	//render updates
 	_window.clear(0, 0, 200, 255);
 
-	staticRenderSystem->Update();
-	playerRenderSystem->Update();
-
 	SDL_Rect rect;
-	rect.x = 100;
-	rect.y = 100;
-	rect.w = 62 * 3;
-	rect.h = 104 * 3;
+	rect.x = 100 - (int)worldCamera.position.x;
+	rect.y = 100 - (int)worldCamera.position.y;
+	rect.w = 62 * 2;
+	rect.h = 104 * 2;
 	SDL_RenderCopy(_window.getRenderer(), testTexture, nullptr, &rect);
+
+	staticRender->Update();
+	playerRender->Update();
 
 	_window.present();
 }
 
 void Game::Run()
 {
-	//create entities
+	//create static green squares
 	for (float i = 0; i < 2; i++)
 	{
 		for (float j = 0; j < 2; j++)

@@ -30,7 +30,7 @@ public:
 	ComponentType GetComponentType()
 	{
 		const char* typeName = typeid(T).name();
-
+		
 		assert(mComponentTypes.find(typeName) != mComponentTypes.end() && "Component not registered before use.");
 
 		return mComponentTypes[typeName];

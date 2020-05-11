@@ -1,12 +1,12 @@
-#ifndef PLAYERINPUTSYSTEM_HPP
-#define PLAYERINPUTSYSTEM_HPP
+#ifndef PLAYERINPUT_HPP
+#define PLAYERINPUT_HPP
 
 #include <SDL.h>
 
-#include "../ECS/System.hpp"
-#include "../Coordinator.hpp"
+#include "../../ECS/System.hpp"
+#include "../../Coordinator.hpp"
 
-class PlayerInputSystem : public System
+class PlayerInput : public System
 {
 public:
 	void Init(Coordinator *coordinator);

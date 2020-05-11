@@ -36,9 +36,6 @@
     <ClInclude Include="Core\Window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Systems\PlayerInputSystem.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Coordinator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -87,19 +84,25 @@
     <ClInclude Include="Core\Components\StaticComp.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Systems\StaticRenderSystem.hpp">
+    <ClInclude Include="Core\Rendering\TextureManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Systems\PlayerRenderSystem.hpp">
+    <ClInclude Include="Core\Systems\Player\PlayerInput.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Systems\PlayerMoveSystem.hpp">
+    <ClInclude Include="Core\Systems\Player\PlayerMove.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Systems\CameraController.hpp">
+    <ClInclude Include="Core\Systems\Player\PlayerRender.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Camera.hpp">
+    <ClInclude Include="Core\Systems\StaticRender.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Systems\Camera\CameraController.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Systems\Camera\Camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -113,22 +116,22 @@
     <ClCompile Include="Core\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Systems\PlayerInputSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Input\InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Systems\StaticRenderSystem.cpp">
+    <ClCompile Include="Core\Systems\Player\PlayerInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Systems\PlayerRenderSystem.cpp">
+    <ClCompile Include="Core\Systems\Player\PlayerMove.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Systems\PlayerMoveSystem.cpp">
+    <ClCompile Include="Core\Systems\Player\PlayerRender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Systems\CameraController.cpp">
+    <ClCompile Include="Core\Systems\StaticRender.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Systems\Camera\CameraController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

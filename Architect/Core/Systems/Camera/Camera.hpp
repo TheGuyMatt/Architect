@@ -1,7 +1,7 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 
-#include "Math/Vector2.hpp"
+#include "../../Math/Vector2.hpp"
 
 struct Camera
 {
