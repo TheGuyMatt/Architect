@@ -71,9 +71,6 @@ private:
 	void Render();
 
 	void Run();
-
-	//test texture things
-	TextureManager _textureManager;
 };
 
 #endif

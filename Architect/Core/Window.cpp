@@ -1,6 +1,7 @@
 #include "Window.hpp"
 
 #include "Input/InputButtons.hpp"
+#include "Util/Log.hpp"
 
 Window::~Window()
 {
@@ -29,21 +30,22 @@ bool Window::Init()
 	//initialize SDL_VIDEO
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
-		std::cerr << "Failed to initialize SDL_VIDEO\n";
+		Log("ERROR: Failed to initialize SDL_Video");
 		return false;
 	}
 
 	//initialize SDL_image
 	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
 	{
-		std::cerr << "Failed to initalize SDL_image\n";
+		Log("Failed to initalize SDL_image");
+		return false;
 	}
 
 	//create the window
 	_window = SDL_CreateWindow(_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width, _height, 0);
 	if (_window == nullptr)
 	{
-		std::cerr << "Failed to create window\n";
+		Log("Failed to create window");
 		return false;
 	}
 	
@@ -51,7 +53,7 @@ bool Window::Init()
 	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
 	if (_renderer == nullptr)
 	{
-		std::cerr << "Failed to create renderer\n";
+		Log("Failed to create renderer");
 		return false;
 	}
 

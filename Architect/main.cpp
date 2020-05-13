@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Game.hpp"
+#include "Core/Util/Log.hpp"
 
-//Include SDL
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
 

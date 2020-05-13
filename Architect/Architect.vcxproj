@@ -48,6 +48,7 @@
     <ClInclude Include="Core\Systems\Player\PlayerRender.hpp" />
     <ClInclude Include="Core\Systems\StaticRender.hpp" />
     <ClInclude Include="Core\Util\FileManager.hpp" />
+    <ClInclude Include="Core\Util\Log.hpp" />
     <ClInclude Include="Core\Util\StringHandler.hpp" />
     <ClInclude Include="Core\Window.hpp" />
     <ClInclude Include="Game.hpp" />

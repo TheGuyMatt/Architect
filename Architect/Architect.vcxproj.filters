@@ -114,6 +114,9 @@
     <ClInclude Include="Core\Util\FileManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Util\Log.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

@@ -10,7 +10,6 @@
 #include "ECS/Types.hpp"
 #include <memory>
 
-
 class Coordinator
 {
 public:

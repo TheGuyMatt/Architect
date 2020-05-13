@@ -1,6 +1,7 @@
 #include "Texture.hpp"
 
 #include <iostream>
+#include "../Util/Log.hpp"
 
 Texture::~Texture()
 {
@@ -15,7 +16,7 @@ bool Texture::load(SDL_Renderer* renderer, std::string filename)
 {
 	if (renderer == nullptr)
 	{
-		std::cerr << "Bad renderer passed to texture class\n";
+		Log("ERROR: Bad renderer passed to texture class");
 		return false;
 	}
 
@@ -25,13 +26,13 @@ bool Texture::load(SDL_Renderer* renderer, std::string filename)
 	SDL_Surface* tempSurface = IMG_Load(_filename.c_str());
 	if (tempSurface == nullptr)
 	{
-		std::cerr << "Unable to load image\n";
+		Log("ERROR: Unable to load image: %s", _filename.c_str());
 		return false;
 	}
 
 	if ((_SDLTexture = SDL_CreateTextureFromSurface(_renderer, tempSurface)) == nullptr)
 	{
-		std::cerr << "Unable to create texture\n";
+		Log("ERROR: Unable to create texture");
 		return false;
 	}
 

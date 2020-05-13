@@ -3,6 +3,7 @@
 #include "StringHandler.hpp"
 #include <Windows.h>
 #include <stdio.h>
+#include "Log.hpp"
 
 //TODO: Add support for other platforms
 
@@ -27,11 +28,13 @@ std::vector<std::string> FileManager::getFilesInFolder(std::string folder)
 
 			std::string filename = path + "/" + fileHandle.cFileName;
 
+			Log("Found file: %s", filename.c_str());
+
 			list.push_back(filename);
 		} while (FindNextFile(dirHandle, &fileHandle) != false);
 		FindClose(dirHandle);
 	}
-	else std::cerr << "Unable to open directory\n";
+	else Log("ERROR: Unable to open directory: %s", path.c_str());
 
 	return list;
 }

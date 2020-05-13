@@ -1,9 +1,15 @@
 #include "Game.hpp"
 
+#include "Core/Util/Log.hpp"
+
 //keeps game loop running
 static bool running = true;
 //handler for quit event
-void QuitHandler(Event &event) { running = false; }
+void QuitHandler(Event &event)
+{
+	running = false;
+	Log("Shutting down game...");
+}
 
 Game::Game(const std::string &title, int width, int height)
 {
@@ -20,7 +26,7 @@ Game::Game(const std::string &title, int width, int height)
 	_inputManager.Init(&_coordinator);
 
 	//initialize textureManager
-	_textureManager.Init(_window.getRenderer());
+	TextureManager::Init(_window.getRenderer());
 
 	//register components with coordinator
 	this->registerComponents();
@@ -126,7 +132,7 @@ void Game::Render()
 	//render updates
 	_window.clear(0, 0, 0, 255);
 
-	_textureManager.get("sky")->render(0, 0, 800, 600);
+	TextureManager::get("sky")->render(0, 0, 800, 600);
 
 	staticRender->Update();
 	playerRender->Update();

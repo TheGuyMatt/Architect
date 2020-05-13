@@ -3,6 +3,7 @@
 #include <iostream>
 #include "../Util/StringHandler.hpp"
 #include "../Util/FileManager.hpp"
+#include "../Util/Log.hpp"
 
 std::map<std::string, Texture*> TextureManager::_textureList;
 
@@ -22,6 +23,8 @@ bool TextureManager::Init(SDL_Renderer* renderer)
 		if (ext != "png") continue;
 
 		addTexture(renderer, ID, filename);
+
+		Log("Added texture to manager \'%s\' at path %s", ID.c_str(), filename.c_str());
 	}
 
 	return true;
@@ -59,8 +62,7 @@ void TextureManager::addTexture(SDL_Renderer* renderer, std::string ID, std::str
 	Texture* newTexture = new Texture();
 	if (newTexture->load(renderer, filename) == false)
 	{
-		std::cerr << "Unable to load texture\n";
-		std::cout << filename << "\n";
+		Log("ERROR: Unable to load texture: %s", filename.c_str());
 		return;
 	}
 
