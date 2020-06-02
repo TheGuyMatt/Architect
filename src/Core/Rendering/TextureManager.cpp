@@ -13,7 +13,7 @@ bool TextureManager::Init(SDL_Renderer* renderer)
 
 	if (renderer == nullptr) return false;
 
-  std::string ResPath = "../../../Resources/Textures/";
+  std::string ResPath = "../Resources/Textures/";
 	std::vector<std::string> files;
   files.push_back(ResPath + "PineTree.png");
   files.push_back(ResPath + "Scarecrow.png");

@@ -25,6 +25,7 @@ Clone this repository:
 
 Build the project:
 ```
+cd Architect
 mkdir build
 cd build
 cmake ..

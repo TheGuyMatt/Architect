@@ -133,7 +133,7 @@ void Game::Render()
 	_window.clear(0, 0, 0, 255);
 
 	TextureManager::get("sky")->render(0, 0, 800, 600);
-
+  
 	staticRender->Update();
 	playerRender->Update();
 
