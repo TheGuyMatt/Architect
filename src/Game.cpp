@@ -13,8 +13,6 @@ void QuitHandler(Event &event)
 	Log("Shutting down game...");
 }
 
-TileSet tempTileSet;
-
 Game::Game(const std::string &title, int width, int height)
 {
 	//initialize coordinator
@@ -31,7 +29,6 @@ Game::Game(const std::string &title, int width, int height)
 
 	//initialize textureManager
 	TextureManager::Init(_window.getRenderer());
-  tempTileSet.load(TextureManager::get("TempTileSet"), Math::Vector2i(32, 32));
 
 	//register components with coordinator
 	this->registerComponents();
@@ -137,8 +134,8 @@ void Game::Render()
 	//render updates
 	_window.clear(0, 0, 0, 255);
 
-	TextureManager::get("sky")->render(0, 0, 800, 600);
-  tempTileSet.render(1, 1, 200, 50, 128, 128);
+	TextureManager::getTexture("sky")->render(0, 0, 800, 600);
+  TextureManager::getTileSet("TempTileSet")->render(1, 0, 500, 300, 128, 128);
 
 	staticRender->Update();
 	playerRender->Update();
