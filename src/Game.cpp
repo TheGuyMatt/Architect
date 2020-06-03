@@ -1,6 +1,8 @@
 #include "Game.hpp"
 
+#include "Core/Rendering/TextureManager.hpp"
 #include "Core/Util/Log.hpp"
+#include "Core/Rendering/TileSet.hpp"
 
 //keeps game loop running
 static bool running = true;
@@ -10,6 +12,8 @@ void QuitHandler(Event &event)
 	running = false;
 	Log("Shutting down game...");
 }
+
+TileSet tempTileSet;
 
 Game::Game(const std::string &title, int width, int height)
 {
@@ -27,6 +31,7 @@ Game::Game(const std::string &title, int width, int height)
 
 	//initialize textureManager
 	TextureManager::Init(_window.getRenderer());
+  tempTileSet.load(TextureManager::get("TempTileSet"), Math::Vector2i(32, 32));
 
 	//register components with coordinator
 	this->registerComponents();
@@ -133,7 +138,8 @@ void Game::Render()
 	_window.clear(0, 0, 0, 255);
 
 	TextureManager::get("sky")->render(0, 0, 800, 600);
-  
+  tempTileSet.render(1, 1, 200, 50, 128, 128);
+
 	staticRender->Update();
 	playerRender->Update();
 
