@@ -38,7 +38,7 @@
 #include "Core/Systems/Camera/CameraController.hpp"
 
 //Rendering
-#include "Core/Rendering/TextureManager.hpp"
+#include "Core/Rendering/ResourceManager.hpp"
 
 //typedef std::shared_ptr<Window> WindowRef;
 //WindowRef _window = std::make_shared<Window>();

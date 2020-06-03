@@ -1,14 +1,14 @@
-#include "TextureManager.hpp"
+#include "ResourceManager.hpp"
 
 #include <iostream>
 #include "../Util/StringHandler.hpp"
 #include "../Util/FileManager.hpp"
 #include "../Util/Log.hpp"
 
-std::map<std::string, Texture*> TextureManager::_textureList;
-std::map<std::string, TileSet*> TextureManager::_tileSetList;
+std::map<std::string, Texture*> ResourceManager::_textureList;
+std::map<std::string, TileSet*> ResourceManager::_tileSetList;
 
-bool TextureManager::Init(SDL_Renderer* renderer)
+bool ResourceManager::Init(SDL_Renderer* renderer)
 {
   CleanupTextures();
   CleanupTileSets();
@@ -55,7 +55,7 @@ bool TextureManager::Init(SDL_Renderer* renderer)
 	return true;
 }
 
-void TextureManager::CleanupTextures()
+void ResourceManager::CleanupTextures()
 {
 	if (_textureList.size() <= 0) return;
 
@@ -73,7 +73,7 @@ void TextureManager::CleanupTextures()
 	_textureList.clear();
 }
 
-void TextureManager::CleanupTileSets()
+void ResourceManager::CleanupTileSets()
 {
 	if (_tileSetList.size() <= 0) return;
 
@@ -91,21 +91,21 @@ void TextureManager::CleanupTileSets()
 	_tileSetList.clear();
 }
 
-Texture* TextureManager::getTexture(std::string ID)
+Texture* ResourceManager::getTexture(std::string ID)
 {
 	if (_textureList.find(ID) == _textureList.end()) return 0;
 
 	return _textureList[ID];
 }
 
-TileSet* TextureManager::getTileSet(std::string ID)
+TileSet* ResourceManager::getTileSet(std::string ID)
 {
 	if (_tileSetList.find(ID) == _tileSetList.end()) return 0;
 
 	return _tileSetList[ID];
 }
 
-void TextureManager::addTexture(SDL_Renderer* renderer, std::string ID, std::string filename)
+void ResourceManager::addTexture(SDL_Renderer* renderer, std::string ID, std::string filename)
 {
 	if ( ID == "" ) return;
 
@@ -119,7 +119,7 @@ void TextureManager::addTexture(SDL_Renderer* renderer, std::string ID, std::str
 	_textureList[ID] = newTexture;
 }
 
-void TextureManager::addTileSet(SDL_Renderer* renderer, std::string ID, std::string filename, Math::Vector2i tileDimensions)
+void ResourceManager::addTileSet(SDL_Renderer* renderer, std::string ID, std::string filename, Math::Vector2i tileDimensions)
 {
 	if ( ID == "" ) return;
 

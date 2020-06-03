@@ -1,5 +1,5 @@
-#ifndef TEXTUREMANAGER_HPP
-#define TEXTUREMANAGER_HPP
+#ifndef RESOURCEMANAGER_HPP
+#define RESOURCEMANAGER_HPP
 
 #include <map>
 #include <vector>
@@ -8,7 +8,7 @@
 #include "Texture.hpp"
 #include "TileSet.hpp"
 
-class TextureManager
+class ResourceManager
 {
 public:
 	static bool Init(SDL_Renderer* renderer);

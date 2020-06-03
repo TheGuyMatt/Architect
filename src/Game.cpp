@@ -1,8 +1,6 @@
 #include "Game.hpp"
 
-#include "Core/Rendering/TextureManager.hpp"
 #include "Core/Util/Log.hpp"
-#include "Core/Rendering/TileSet.hpp"
 
 //keeps game loop running
 static bool running = true;
@@ -28,7 +26,7 @@ Game::Game(const std::string &title, int width, int height)
 	_inputManager.Init(&_coordinator);
 
 	//initialize textureManager
-	TextureManager::Init(_window.getRenderer());
+	ResourceManager::Init(_window.getRenderer());
 
 	//register components with coordinator
 	this->registerComponents();
@@ -134,8 +132,8 @@ void Game::Render()
 	//render updates
 	_window.clear(0, 0, 0, 255);
 
-	TextureManager::getTexture("sky")->render(0, 0, 800, 600);
-  TextureManager::getTileSet("TempTileSet")->render(1, 0, 500, 300, 128, 128);
+	ResourceManager::getTexture("sky")->render(0, 0, 800, 600);
+  ResourceManager::getTileSet("TempTileSet")->render(1, 1, 500, 300, 128, 128);
 
 	staticRender->Update();
 	playerRender->Update();
