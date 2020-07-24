@@ -1,3 +1,4 @@
 build/
 .clangd/
+Resources/
 compile_commands.json

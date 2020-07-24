@@ -5,7 +5,7 @@
 #include <SDL_image.h>
 
 #include "../Math/Vector2.hpp"
-#include "../Rendering/Texture.hpp"
+#include "Texture.hpp"
 
 class TileSet
 {
@@ -24,9 +24,9 @@ public:
 
 private:
   Texture *_texture;
-  Math::Vector2i _dimensions = Math::Vector2i();
-  Math::Vector2i _tileDimensions = Math::Vector2i();
-	Math::Vector2i _tiles = Math::Vector2i();
+  Math::Vector2i _dimensions; 
+  Math::Vector2i _tileDimensions;
+	Math::Vector2i _tiles;
 };
 
 #endif
