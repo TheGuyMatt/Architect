@@ -1,6 +1,8 @@
 # Architect
 A 2D game engine written in C++ using the SDL2 libraries.
 
+**NOTE**: As of 10/26/2020, I have started work on CArchitect, which uses C as the language instead. I will no longer be working on this project and am shifting focus. You can find it [here](https://github.com/TheGuyMatt/CArchitect)
+
 ## Requirements
 ### Windows (Visual Studio)
 CMake expects to find the SDL2 headers and libraries in a subfolder named `extern\SDL-2.0.5`. Download [here](https://www.libsdl.org/release/SDL2-devel-2.0.5-VC.zip) and extract to the `extern` directory.
